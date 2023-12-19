@@ -7,9 +7,13 @@ from app.controller import todos
 def home():
     return "Hello, world!"
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['POST'])
 def login():
     return users.login()
+
+@app.route('/refresh', methods=['POST'])
+def refresh():
+    return users.refresh()
 
 # users routes
 @app.route('/users', methods=['GET'])
@@ -32,7 +36,7 @@ def updateUser(id):
 def deleteUser(id):
     return users.deleteUser(id)
 
-# todo routes
+################ todo routes
 @app.route('/todo', methods=['GET'])
 def getTodos():
     return todos.index()

@@ -1,7 +1,19 @@
 from app.model.users import Users
 from app import response, app, db
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import request
+from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import *
+
+@jwt_required(refresh=True)
+def refresh():
+    try:
+        user = get_jwt_identity()
+        new_token = create_access_token(identity=user, fresh=False)
+
+        return response.ok({'token_access': new_token}, "success!")
+    except Exception as error:
+        print(f'Failed to connect: {error}')
 
 def login():
     try:
@@ -21,7 +33,13 @@ def login():
             'email': user.email
         }
 
-        return response.ok([data], "Login successful")
+        expires = timedelta(days=1)
+        expires_refresh = timedelta(days=3)
+        access_token = create_access_token(data, fresh=True, expires_delta=expires)
+        refresh_token = create_refresh_token(data, expires_delta=expires_refresh)
+
+        
+        return response.ok({'data': data, 'token_access': access_token, 'token_refresh': refresh_token}, "Login successful")
     except Exception as error:
         print(f'Failed to connect: {error}')
 

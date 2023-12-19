@@ -3,11 +3,14 @@ from app.controller import users
 from app import response, app, db
 from datetime import datetime
 from flask import request, jsonify
+from flask_jwt_extended import *
 
+@jwt_required()
 def index():
     try:
         id = request.args.get('user_id')
         todo = Todos.query.filter_by(user_id=id).all()
+        print(todo)
         data = transform(todo)
         return response.ok(data, "succes")
     except Exception as error:
