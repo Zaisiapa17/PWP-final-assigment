@@ -66,19 +66,19 @@ def insertProductCatalog():
 
 def updateProductCatalog(id):
     try:
-        user = ProductCatalogs.query.filter_by(id=id).first()
-        if not user:
-            return response.badRequest([], "User not found")
+        catalog = ProductCatalogs.query.filter_by(id=id).first()
+        if not catalog:
+            return response.badRequest([], "catalog not found")
 
-        # Update user fields if present in the request JSON
-        if 'name' in request.json:
-            user.name = request.json['name']
-        if 'email' in request.json:
-            user.email = request.json['email']
-        if 'password' in request.json:
-            user.setPassword(request.json['password'])
+        # Update catalog fields if present in the request JSON
+        if 'product_name' in request.json:
+            catalog.product_name = request.json['product_name']
+        if 'type' in request.json:
+            catalog.type = request.json['type']
+        if 'brand_id' in request.json:
+            catalog.brand_id = request.json['brand_id']
 
-        user.updated_at = datetime.utcnow()
+        catalog.updated_at = datetime.utcnow()
         db.session.commit()
 
         return response.ok([], "Success update data")
@@ -88,14 +88,14 @@ def updateProductCatalog(id):
 
 def deleteProductCatalog(id):
     try:
-        user = ProductCatalogs.query.filter_by(id=id).first()
-        if not user:
-            return response.badRequest([], "User not found")
+        catalog = ProductCatalogs.query.filter_by(id=id).first()
+        if not catalog:
+            return response.badRequest([], "Catalog not found")
 
-        db.session.delete(user)
+        db.session.delete(catalog)
         db.session.commit()
 
-        return response.ok([], "Success delete user")
+        return response.ok([], "Success delete catalog")
     except Exception as error:
         print(f'Failed to connect: {error}')
-        return response.internalServerError([], "Failed to delete user")
+        return response.internalServerError([], "Failed to delete catalog")
