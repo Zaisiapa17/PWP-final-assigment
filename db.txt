@@ -46,3 +46,6 @@ CREATE TABLE `product_catalogs` (
   CONSTRAINT `product_catalogs_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `product_brands` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
+
+cd Documents/KAMPUS\ UTY/Semester\ 3/Pemrograman\ Web\ Praktek/final-assigment/
+
