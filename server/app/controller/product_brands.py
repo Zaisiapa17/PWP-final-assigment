@@ -1,5 +1,6 @@
 from app.model.product_brands import ProductBrands
 from app import response, app, db
+from app.controller import product_catalogs
 from datetime import datetime
 from flask import request
 
@@ -11,7 +12,8 @@ def getAllProductBrands():
         for brand in brands_list:
             data.append({
                 'id': brand.id,
-                'brand_name': brand.brand_name
+                'brand_name': brand.brand_name,
+                'brand_catalogs': product_catalogs.getProductCatalogByBrandId(brand.id)
             })
         return response.ok(data, "success fetch data")
     except Exception as error:

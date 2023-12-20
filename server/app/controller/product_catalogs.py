@@ -5,13 +5,13 @@ from flask import request
 
 def getAllProductCatalogs():
     try:
-        users_list = ProductCatalogs.query.all()
+        catalog_list = ProductCatalogs.query.all()
         data = []
-        for user in users_list:
+        for user in catalog_list:
             data.append({
                 'id': user.id,
-                'name': user.name,
-                'email': user.email
+                'product_name': user.product_name,
+                'type': user.type
             })
         return response.ok(data, "success fetch data")
     except Exception as error:
@@ -30,6 +30,24 @@ def getProductCatalogCatalogById(id):
         }
 
         return response.ok([data], "success fetch data")
+    except Exception as error:
+        print(f'Failed to connect: {error}')
+
+def getProductCatalogByBrandId(id):
+    try:
+        catalog_list = ProductCatalogs.query.filter_by(brand_id=id).all()
+        if not catalog_list:
+            return response.badRequest([], "id not found")
+
+        data = []
+        for catalog in catalog_list:
+            data.append({
+                'id': catalog.id,
+                'product_name': catalog.product_name,
+                'type': catalog.type
+            })
+
+        return data
     except Exception as error:
         print(f'Failed to connect: {error}')
 
