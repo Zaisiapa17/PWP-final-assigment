@@ -83,23 +83,23 @@ def deleteProductBrand(id):
 ################ product-catalogs routes
 @app.route('/product-catalogs', methods=['GET'])
 def getProductcatalogs():
-    return product_brands.getAllProductBrands()
+    return product_catalogs.getAllProductCatalogs()
 
 @app.route('/product-catalogs/<id>', methods=['GET'])
 def getProductcatalog(id):
-    return product_brands.getProductBrandById(id)
+    return product_catalogs.getProductCatalogCatalogById(id)
 
 @app.route('/product-catalogs', methods=['POST'])
 def addProductcatalog():
-    return product_brands.insertProductBrand()
+    return product_catalogs.insertProductCatalog()
 
 @app.route('/product-catalogs/<id>', methods=['PUT'])
 def updateProductcatalog(id):
-    return product_brands.updateProductBrand(id)
+    return product_catalogs.updateProductCatalog(id)
 
 @app.route('/product-catalogs/<id>', methods=['DELETE'])
 def deleteProductcatalog(id):
-    return product_brands.deleteProductBrand(id)
+    return product_catalogs.deleteProductCatalog(id)
 
 
 
