@@ -1,7 +1,8 @@
 from app import app
+from app.controller import product_brands
+from app.controller import product_catalogs
 from app.controller import users
 from app.controller import todos
-from app.controller import product_brands
 
 @app.route('/')
 @app.route('/index')
@@ -77,6 +78,27 @@ def updateProductBrand(id):
 
 @app.route('/product-brands/<id>', methods=['DELETE'])
 def deleteProductBrand(id):
+    return product_brands.deleteProductBrand(id)
+
+################ product-catalogs routes
+@app.route('/product-catalogs', methods=['GET'])
+def getProductcatalogs():
+    return product_brands.getAllProductBrands()
+
+@app.route('/product-catalogs/<id>', methods=['GET'])
+def getProductcatalog(id):
+    return product_brands.getProductBrandById(id)
+
+@app.route('/product-catalogs', methods=['POST'])
+def addProductcatalog():
+    return product_brands.insertProductBrand()
+
+@app.route('/product-catalogs/<id>', methods=['PUT'])
+def updateProductcatalog(id):
+    return product_brands.updateProductBrand(id)
+
+@app.route('/product-catalogs/<id>', methods=['DELETE'])
+def deleteProductcatalog(id):
     return product_brands.deleteProductBrand(id)
 
 

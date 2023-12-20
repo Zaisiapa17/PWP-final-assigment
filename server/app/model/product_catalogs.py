@@ -11,4 +11,4 @@ class ProductCatalogs(db.Model):
     updated_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<ProductBrands {}>'.format(self.product_brands)
+        return '<ProductCatalogs {}>'.format(self.product_name)
