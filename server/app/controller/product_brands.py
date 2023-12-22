@@ -13,6 +13,7 @@ def getAllProductBrands():
             data.append({
                 'id': brand.id,
                 'brand_name': brand.brand_name,
+                'brand_address': brand.brand_address,
                 'brand_catalogs': product_catalogs.getProductCatalogByBrandId(brand.id)
             })
         return response.ok(data, "success fetch data")
@@ -28,6 +29,7 @@ def getProductBrandById(id):
         data = {
             'id': brand.id,
             'brand_name': brand.brand_name,
+            'brand_address': brand.brand_address
         }
 
         return response.ok([data], "success fetch data")
@@ -37,8 +39,9 @@ def getProductBrandById(id):
 def insertProductBrand():
     try:
         name = request.json['brand_name']
+        brand_address = request.json['brand_address']
 
-        brand = ProductBrands(brand_name=name)
+        brand = ProductBrands(brand_name=name, brand_address=brand_address)
         db.session.add(brand)
         db.session.commit()
         return response.ok([], "brand added successfully")
@@ -54,6 +57,8 @@ def updateProductBrand(id):
         # Update brand fields if present in the request JSON
         if 'brand_name' in request.json:
             brand.brand_name = request.json['brand_name']
+        if 'brand_address' in request.json:
+            brand.brand_address = request.json['brand_address']
 
         brand.updated_at = datetime.utcnow()
         db.session.commit()
