@@ -18,6 +18,8 @@ def login():
 def refresh():
     return users.refresh()
 
+
+
 ################ users routes
 @app.route('/users', methods=['GET'])
 def getUsers():
@@ -38,6 +40,8 @@ def updateUser(id):
 @app.route('/users/<id>', methods=['DELETE'])
 def deleteUser(id):
     return users.deleteUser(id)
+
+
 
 ################ todo routes
 @app.route('/todo', methods=['GET'])
@@ -60,6 +64,8 @@ def updateTodo(id):
 def deleteTodo(id):
     return todos.deleteTodo(id)
 
+
+
 ################ product-brands routes
 @app.route('/product-brands', methods=['GET'])
 def getProductBrands():
@@ -80,6 +86,8 @@ def updateProductBrand(id):
 @app.route('/product-brands/<id>', methods=['DELETE'])
 def deleteProductBrand(id):
     return product_brands.deleteProductBrand(id)
+
+
 
 ################ product-catalogs routes
 @app.route('/product-catalogs', methods=['GET'])
@@ -102,10 +110,28 @@ def updateProductcatalog(id):
 def deleteProductcatalog(id):
     return product_catalogs.deleteProductCatalog(id)
 
-################ product-catalogs routes
+
+
+################ customer routes
 @app.route('/customers', methods=['GET'])
 def getCustomers():
-    return customers
+    return customers.getAllCustomers()
+
+@app.route('/customers/<id>', methods=['GET'])
+def getCustomer(id):
+    return customers.getCustomerById(id)
+
+@app.route('/customers', methods=['POST'])
+def addCustomer():
+    return customers.insertCustomer()
+
+@app.route('/customers/<id>', methods=['PUT'])
+def updateCustomer(id):
+    return customers.updateCustomer(id)
+
+@app.route('/customers/<id>', methods=['DELETE'])
+def deleteCustomer(id):
+    return customers.deleteCustomer(id)
 
 
 

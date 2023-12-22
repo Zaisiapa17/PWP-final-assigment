@@ -45,7 +45,8 @@ def insertCustomer():
         phone = request.json['phone']
         password = request.json['password']
 
-        customer = Customers(name=name, email=email, phone=phone, password=password)
+        customer = Customers(name=name, email=email, phone=phone)
+        customer.setPassword(password)
         db.session.add(customer)
         db.session.commit()
         return response.ok([], "customer added successfully")
@@ -66,7 +67,7 @@ def updateCustomer(id):
         if 'phone' in request.json:
             customer.phone = request.json['phone']
         if 'password' in request.json:
-            customer.password = request.json['password']
+            customer.setPassword(request.json['password'])
 
         customer.updated_at = datetime.utcnow()
         db.session.commit()
