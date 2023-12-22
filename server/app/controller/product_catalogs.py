@@ -7,11 +7,14 @@ def getAllProductCatalogs():
     try:
         catalog_list = ProductCatalogs.query.all()
         data = []
-        for user in catalog_list:
+        for catalog in catalog_list:
             data.append({
-                'id': user.id,
-                'product_name': user.product_name,
-                'type': user.type
+                'id': catalog.id,
+                'product_name': catalog.product_name,
+                'type': catalog.type,
+                'price': catalog.price,
+                'image': catalog.image,
+                'sold_item': catalog.sold_item
             })
         return response.ok(data, "success fetch data")
     except Exception as error:
@@ -19,14 +22,17 @@ def getAllProductCatalogs():
 
 def getProductCatalogCatalogById(id):
     try:
-        user = ProductCatalogs.query.filter_by(id=id).first()
-        if not user:
+        catalog = ProductCatalogs.query.filter_by(id=id).first()
+        if not catalog:
             return response.badRequest([], "id not found")
 
         data = {
-            'id': user.id,
-            'name': user.name,
-            'email': user.email
+                'id': catalog.id,
+                'product_name': catalog.product_name,
+                'type': catalog.type,
+                'price': catalog.price,
+                'image': catalog.image,
+                'sold_item': catalog.sold_item
         }
 
         return response.ok([data], "success fetch data")
@@ -44,7 +50,10 @@ def getProductCatalogByBrandId(id):
             data.append({
                 'id': catalog.id,
                 'product_name': catalog.product_name,
-                'type': catalog.type
+                'type': catalog.type,
+                'price': catalog.price,
+                'image': catalog.image,
+                'sold_item': catalog.sold_item
             })
 
         return data
@@ -56,8 +65,11 @@ def insertProductCatalog():
         name = request.json['product_name']
         type_pdk = request.json['type']
         brand_id = request.json['brand_id']
+        image = request.json['image']
+        price = request.json['price']
+        sold_item = request.json['sold_item']
 
-        catalog = ProductCatalogs(product_name=name, type=type_pdk, brand_id=brand_id)
+        catalog = ProductCatalogs(product_name=name, type=type_pdk, image=image, price=price, sold_item=sold_item, brand_id=brand_id)
         db.session.add(catalog)
         db.session.commit()
         return response.ok([], "Catalogs added successfully")
@@ -75,6 +87,12 @@ def updateProductCatalog(id):
             catalog.product_name = request.json['product_name']
         if 'type' in request.json:
             catalog.type = request.json['type']
+        if 'image' in request.json:
+            catalog.image = request.json['image']
+        if 'price' in request.json:
+            catalog.price = request.json['price']
+        if 'sold_item' in request.json:
+            catalog.sold_item = request.json['sold_item']
         if 'brand_id' in request.json:
             catalog.brand_id = request.json['brand_id']
 
