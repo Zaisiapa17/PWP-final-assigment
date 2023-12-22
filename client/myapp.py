@@ -2,6 +2,8 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# coustomers pages
+
 @app.route("/login")
 def login():
     return render_template('/login.html')
@@ -14,6 +16,18 @@ def index():
 @app.route("/products")
 def product():
     return render_template('/product.html')
+
+
+
+# admin pages
+
+@app.route("/admin/login")
+def adminLogin():
+    return render_template('/admin/login.html')
+
+@app.route("/admin/dashboard")
+def adminDashboard():
+    return render_template('/admin/dashboard.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
