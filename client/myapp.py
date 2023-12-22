@@ -25,6 +25,7 @@ def product():
 def adminLogin():
     return render_template('/admin/login.html')
 
+@app.route("/admin/")
 @app.route("/admin/dashboard")
 def adminDashboard():
     return render_template('/admin/dashboard.html')
@@ -36,6 +37,10 @@ def adminProducts():
 @app.route("/admin/customers")
 def adminCustomers():
     return render_template('/admin/customers.html')
+
+@app.route("/admin/contacts")
+def adminContacts():
+    return render_template('/admin/contact.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
