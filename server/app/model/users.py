@@ -20,3 +20,5 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<Users {}>'.format(self.name)
+
+from app.model.customers import Customers
