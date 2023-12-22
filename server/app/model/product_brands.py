@@ -4,6 +4,7 @@ from datetime import datetime
 class ProductBrands(db.Model):
     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
     brand_name = db.Column(db.String(225), nullable=False)
+    brand_address = db.Column(db.String(225), nullable=False)
     created_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 

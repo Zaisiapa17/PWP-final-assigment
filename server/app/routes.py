@@ -3,6 +3,7 @@ from app.controller import product_brands
 from app.controller import product_catalogs
 from app.controller import users
 from app.controller import todos
+from app.controller import customers
 
 @app.route('/')
 @app.route('/index')
@@ -100,6 +101,11 @@ def updateProductcatalog(id):
 @app.route('/product-catalogs/<id>', methods=['DELETE'])
 def deleteProductcatalog(id):
     return product_catalogs.deleteProductCatalog(id)
+
+################ product-catalogs routes
+@app.route('/customers', methods=['GET'])
+def getCustomers():
+    return customers
 
 
 
