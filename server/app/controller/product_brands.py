@@ -70,14 +70,14 @@ def updateProductBrand(id):
 
 def deleteProductBrand(id):
     try:
-        user = ProductBrands.query.filter_by(id=id).first()
-        if not user:
-            return response.badRequest([], "User not found")
+        brand = ProductBrands.query.filter_by(id=id).first()
+        if not brand:
+            return response.badRequest([], "brand not found")
 
-        db.session.delete(user)
+        db.session.delete(brand)
         db.session.commit()
 
-        return response.ok([], "Success delete user")
+        return response.ok([], "Success delete brand")
     except Exception as error:
         print(f'Failed to connect: {error}')
-        return response.internalServerError([], "Failed to delete user")
+        return response.internalServerError([], "Failed to delete brand")
