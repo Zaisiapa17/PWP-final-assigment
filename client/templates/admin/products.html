@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Halaman Produk</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../static/admin/static/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../static/admin/static/plugins/AdminLTE/dist/css/adminlte.min.css">
+    <style>
+        /* width */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: rgb(212, 212, 212);
+            border-radius: 10px;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #969696;
+        }
+    </style>
+</head>
+<!--
+`body` tag options:
+
+  Apply one or more of the following classes to to the body tag
+  to get the desired effect
+
+  * sidebar-collapse
+  * sidebar-mini
+-->
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <!-- Sidebar user panel (optional) -->
+                    <div class="user-panel d-flex">
+                        <div class="image">
+                            <img src="https://via.placeholder.com/40x40?text=" alt="..." class="rounded-circle">
+                        </div>
+                        <div class="info">
+                            <a href="#" class="d-block">Alie nih bous</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-sign-out-alt fa-lg"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="index3.html" class="brand-link">
+                <div class="image">
+                    <img src="https://via.placeholder.com/40x40?text=" alt="AdminLTE Logo"
+                        class="brand-image img-circle elevation-3" style="opacity: .8">
+                </div>
+                <span class="brand-text font-weight-light">Webzet.dev</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="info">
+                        <a href="#" class="d-block"></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="pages/widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/widgets.html" class="nav-link active">
+                                <i class="nav-icon fas fa-boxes"></i>
+                                <p>
+                                    Produk
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    Daftar Pelanggan
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-address-book"></i>
+                                <p>
+                                    Edit Kontak
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Produk</h1>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- modal -->
+
+            <!-- modal edit-->
+            <div class="modal fade" id="modal-edit" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit Produk</h5>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-name-edit">Nama Barang</label>
+                                                <input type="text" class="form-control" id="item-name-edit"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="brand-edit">Brand</label>
+                                                <select class="custom-select" id="brand-edit">
+                                                    <option selected>Pilih...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-location-edit">Lokasi</label>
+                                                <input type="text" class="form-control" id="item-location-edit"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-price-edit">Harga</label>
+                                                <input type="text" class="form-control" id="item-price-edit"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-sold-edit">Terjual</label>
+                                                <input type="text" class="form-control" id="item-sold-edit"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
+                                    class="nav-icon fas fa-times mr-1"></i> Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="" id="button-edit"><i
+                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal edit-->
+
+            <!-- modal add-->
+            <div class="modal fade" id="modal-add" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Add Produk</h5>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-name-add">Nama Barang</label>
+                                                <input type="text" class="form-control" id="item-name-add"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="brand-add">Brand</label>
+                                                <select class="custom-select" id="brand-add">
+                                                    <option selected>Pilih...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-location-add">Lokasi</label>
+                                                <input type="text" class="form-control" id="item-location-add"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-price-add">Harga</label>
+                                                <input type="text" class="form-control" id="item-price-add"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-sold-add">Terjual</label>
+                                                <input type="text" class="form-control" id="item-sold-add"
+                                                    placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
+                                    class="nav-icon fas fa-times mr-1"></i> Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="" id="button-add"><i
+                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal add-->
+
+            <!-- /.modal -->
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card card-primary card-outline">
+                                <div class="card-header pb-sm-3">
+                                    <h5 class="card-title m-0">
+                                        <div class="d-flex align-content-center flex-wrap">
+                                            <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
+                                                data-target="#modal-add" onclick="">
+                                                <i class="nav-icon fas fa-plus mr-1"></i>
+                                                Tambah
+                                            </button>
+                                        </div>
+                                    </h5>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table
+                                            class="table table-striped table-bordered table-hover text-nowrap mx-auto"
+                                            id="data-table">
+                                            <thead style="color: #3d3d3d;">
+                                                <th width="1px">No</th>
+                                                <th>Nama Barang</th>
+                                                <th>Brand</th>
+                                                <th>Lokasi</th>
+                                                <th>Harga</th>
+                                                <th>Terjual</th>
+                                                <th class="text-center">Aksi</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Batik Bagus</td>
+                                                    <td>Batik Indo</td>
+                                                    <td>Yogyakarta</td>
+                                                    <td>250000</td>
+                                                    <td>432</td>
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Wayang Kulit</td>
+                                                    <td>Budaya Indo</td>
+                                                    <td>Surakarta</td>
+                                                    <td>180000</td>
+                                                    <td>325</td>
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>Angklung Harmonis</td>
+                                                    <td>Musik Indo</td>
+                                                    <td>Bandung</td>
+                                                    <td>350000</td>
+                                                    <td>490</td>
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>Caping Tradisional</td>
+                                                    <td>Mode Indo</td>
+                                                    <td>Solo</td>
+                                                    <td>120000</td>
+                                                    <td>280</td>
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td>Topeng Khas</td>
+                                                    <td>Seni Indo</td>
+                                                    <td>Ubud</td>
+                                                    <td>280000</td>
+                                                    <td>375</td>
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <nav aria-label="..." id="pagination-links">
+                                            <ul class="pagination pagination-sm">
+                                                <li class="page-item disabled">
+                                                    <span class="page-link">Previous</span>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item active" aria-current="page">
+                                                    <span class="page-link">2</span>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#">Next</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2023 <a href="https://adminlte.io">Webzet.dev</a>.</strong>
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0
+            </div>
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="../static/admin/static/plugins/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../static/admin/static/plugins/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="../static/admin/static/plugins/AdminLTE/dist/js/adminlte.js"></script>
+</body>
+
+</html>

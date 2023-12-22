@@ -29,5 +29,9 @@ def adminLogin():
 def adminDashboard():
     return render_template('/admin/dashboard.html')
 
+@app.route("/admin/products")
+def adminProducts():
+    return render_template('/admin/products.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
