@@ -33,5 +33,9 @@ def adminDashboard():
 def adminProducts():
     return render_template('/admin/products.html')
 
+@app.route("/admin/customers")
+def adminCustomers():
+    return render_template('/admin/customers.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
