@@ -81,3 +81,13 @@ def deleteProductBrand(id):
     except Exception as error:
         print(f'Failed to connect: {error}')
         return response.internalServerError([], "Failed to delete brand")
+
+def singleTransform(brand_id):
+        brand = ProductBrands.query.filter_by(id=brand_id).first()
+        data = {
+            'id': brand.id,
+            'brand_name': brand.brand_name,
+            'brand_address': brand.brand_address
+        }
+
+        return data
