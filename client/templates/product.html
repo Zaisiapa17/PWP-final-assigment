@@ -491,26 +491,8 @@
     </footer>
     <script src="../static/plugins/jquery/jquery.min.js"></script>
     <script>
-        // Function to generate product card HTML
-        function generateProductCard(item) {
-            let price = item.price;
-            let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
-
-            return (`
-                <div class="card" style="width: 12rem; cursor: pointer;">
-                    <img src="https://via.placeholder.com/640x630?text=3" class="card-img-top" alt="...">
-                    <div class="card-body p-2 py-3">
-                        <h6 class="card-text">${item.product_name}</h6>
-                        <h5 class="card-title">Rp${price_idr}</h5>
-                        <span class="badge bg-light text-success">${item.brand_info.brand_address}</span>
-                        <span class="d-block badge text-secondary text-start fw-normal">${item.sold_item} terjual</span>
-                    </div>
-                </div>
-            `);
-        }
-
-        // Function to generate product items based on specific criteria
-        function generateProductItems(container, products, criteria, maxItems) {
+        // Function to generate product cards and items
+        function generateAndAppendProducts(container, products, criteria, maxItems) {
             container.html('');
             let totalItems = 0;
 
@@ -521,7 +503,21 @@
                     continue;
                 }
 
-                let item = generateProductCard(currentItem);
+                let price = currentItem.price;
+                let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
+
+                let item = (`
+                    <div class="card" style="width: 12rem; cursor: pointer;">
+                        <img src="https://via.placeholder.com/640x630?text=3" class="card-img-top" alt="...">
+                        <div class="card-body p-2 py-3">
+                            <h6 class="card-text">${currentItem.product_name}</h6>
+                            <h5 class="card-title">Rp${price_idr}</h5>
+                            <span class="badge bg-light text-success">${currentItem.brand_info.brand_address}</span>
+                            <span class="d-block badge text-secondary text-start fw-normal">${currentItem.sold_item} terjual</span>
+                        </div>
+                    </div>
+                `);
+
                 container.append(item);
 
                 totalItems++;
@@ -540,14 +536,15 @@
             },
             success: function (respond) {
 
-                // Usage for produk terlaris
-                generateProductItems($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 50, 5);
+            // Usage for produk terlaris
+            generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 50, 5);
 
-                // Usage for produk populer
-                generateProductItems($("#produk-populer"), respond.values, (item) => item.price >= 100000, 5);
+            // Usage for produk populer
+            generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 100000, 5);
 
-                // Usage for rekomendasi untukmu
-                generateProductItems($("#produk-rekomendasi"), respond.values, () => true, Infinity);
+            // Usage for rekomendasi untukmu
+            generateAndAppendProducts($("#produk-rekomendasi"), respond.values, () => true, Infinity);
+
             },
             error: function () {
                 alertError("Error");
