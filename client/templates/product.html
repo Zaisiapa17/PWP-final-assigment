@@ -492,7 +492,7 @@
     <script src="../static/plugins/jquery/jquery.min.js"></script>
     <script>
         // Function to generate product cards and items
-        function generateAndAppendProducts(container, products, criteria, maxItems) {
+        const generateAndAppendProducts = (container, products, criteria, maxItems) => {
             container.html('');
             let totalItems = 0;
 
