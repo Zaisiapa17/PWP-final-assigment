@@ -35,6 +35,72 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #969696;
         }
+
+        .placeholder {
+            display: inline-block;
+            min-height: 1em;
+            vertical-align: middle;
+            cursor: wait;
+            background-color: currentColor;
+            opacity: .5
+        }
+
+        .placeholder.btn::before {
+            display: inline-block;
+            content: ""
+        }
+
+        .placeholder-xs {
+            min-height: .6em
+        }
+
+        .placeholder-sm {
+            min-height: .8em
+        }
+
+        .placeholder-lg {
+            min-height: 1.2em
+        }
+
+        .placeholder-glow .placeholder {
+            -webkit-animation: placeholder-glow 2s ease-in-out infinite;
+            animation: placeholder-glow 2s ease-in-out infinite
+        }
+
+        @-webkit-keyframes placeholder-glow {
+            50% {
+                opacity: .2
+            }
+        }
+
+        @keyframes placeholder-glow {
+            50% {
+                opacity: .2
+            }
+        }
+
+        .placeholder-wave {
+            -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+            mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+            -webkit-mask-size: 200% 100%;
+            mask-size: 200% 100%;
+            -webkit-animation: placeholder-wave 2s linear infinite;
+            animation: placeholder-wave 2s linear infinite
+        }
+
+        @-webkit-keyframes placeholder-wave {
+            100% {
+                -webkit-mask-position: -200% 0%;
+                mask-position: -200% 0%
+            }
+        }
+
+        @keyframes placeholder-wave {
+            100% {
+                -webkit-mask-position: -200% 0%;
+                mask-position: -200% 0%
+            }
+        }
     </style>
 </head>
 <!--
@@ -349,12 +415,24 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Batik Bagus</td>
-                                                    <td>Batik Indo</td>
-                                                    <td>Yogyakarta</td>
-                                                    <td>250000</td>
-                                                    <td>432</td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
                                                     <td class="text-center">
                                                         <button type="button"
                                                             class="btn btn-secondary btn-sm bg-primary border-0"
@@ -369,36 +447,25 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-
                                                 <tr>
-                                                    <td>3</td>
-                                                    <td>Wayang Kulit</td>
-                                                    <td>Budaya Indo</td>
-                                                    <td>Surakarta</td>
-                                                    <td>180000</td>
-                                                    <td>325</td>
-                                                    <td class="text-center">
-                                                        <button type="button"
-                                                            class="btn btn-secondary btn-sm bg-primary border-0"
-                                                            data-placement="top" title="hapus">
-                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
-                                                            data-toggle="modal" data-target="#modal-edit"
-                                                            data-placement="top" title="edit">
-                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
-                                                        </button>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
                                                     </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>Angklung Harmonis</td>
-                                                    <td>Musik Indo</td>
-                                                    <td>Bandung</td>
-                                                    <td>350000</td>
-                                                    <td>490</td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
                                                     <td class="text-center">
                                                         <button type="button"
                                                             class="btn btn-secondary btn-sm bg-primary border-0"
@@ -413,14 +480,25 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-
                                                 <tr>
-                                                    <td>5</td>
-                                                    <td>Caping Tradisional</td>
-                                                    <td>Mode Indo</td>
-                                                    <td>Solo</td>
-                                                    <td>120000</td>
-                                                    <td>280</td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
                                                     <td class="text-center">
                                                         <button type="button"
                                                             class="btn btn-secondary btn-sm bg-primary border-0"
@@ -435,14 +513,25 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-
                                                 <tr>
-                                                    <td>6</td>
-                                                    <td>Topeng Khas</td>
-                                                    <td>Seni Indo</td>
-                                                    <td>Ubud</td>
-                                                    <td>280000</td>
-                                                    <td>375</td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
                                                     <td class="text-center">
                                                         <button type="button"
                                                             class="btn btn-secondary btn-sm bg-primary border-0"
@@ -457,7 +546,39 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-
+                                                <tr>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -469,12 +590,12 @@
                                                 <li class="page-item disabled">
                                                     <span class="page-link">Previous</span>
                                                 </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active" aria-current="page">
-                                                    <span class="page-link">2</span>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
+                                                <li class="page-item"><a class="page-link" href="#">
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                </a></li>
+                                                <li class="page-item disabled">
                                                     <a class="page-link" href="#">Next</a>
                                                 </li>
                                             </ul>
@@ -518,14 +639,18 @@
     <script src="../static/admin/static/plugins/AdminLTE/dist/js/adminlte.js"></script>
 
     <script>
+        $(document).ready(function () {
+            fetchDataAndRender(1);
+        });
+
         function fetchDataAndRender(page) {
             $.ajax({
-                url: buildUrl(page),
+                url: `http://127.0.0.1:3000/admin/product-catalogs?page=${page}`,
                 type: "GET",
                 dataType: "json",
                 success: function (response) {
-                    renderData(response.data, page);
-                    renderPagination(response.totalPages, page, response.data);
+                    renderData(response.values, page);
+                    renderPagination(response.total_page, page, response.values);
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -535,40 +660,42 @@
 
         function renderData(data, current_page) {
             const table = $("#data-table");
-            const tbody = table.querySelector("tbody");
-            tbody.innerHTML = ""; // Clear the existing table body content
+            const tbody = table.find("tbody"); // Use jQuery's find method instead of querySelector
+            tbody.empty(); // Use jQuery's empty method to clear the existing table body content
 
             const startNumber = (current_page - 1) * 5;
 
             data.forEach(function (row, index) {
-                const new_row = document.createElement("tr");
-                const bac_color_number_class = row.total_rows > 0 ? "badge badge-warning" : "badge badge-danger";
+                const new_row = $("<tr></tr>"); // Create a new jQuery object for the row
+                let price = row.price;
+                let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
 
-                new_row.innerHTML = `
-                <td class="text-center align-middle">${startNumber + index + 1}</td>
-                <td class="text-center align-middle"><img class="img-thumbnail" src="docs/img/${row.image_profile}" alt="" width="40px"></td>
-                <td class="text-center align-middle">${row.kode}</td>
-                <td class="text-center align-middle">${row.nama}</td>
-                <td class="text-center align-middle">${row.jenis_kelamin}</td>
-                <td class="text-center align-middle">
-                <a href="javascript:void(0)" class="${bac_color_number_class}" onclick="tampilModalMahasiswaSubPage(${row.id_personal_name})">${row.total_rows}</a>
-                </td>
-                <td class="text-center align-middle">${row.nama_desa}, ${row.nama_kecamatan}, ${row.nama_kabupaten}, ${row.nama_provinsi}</td>
-                <td class="p-sm-2 text-center align-middle">
-                <!-- Button with a click event to open the modal -->
-                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="MahasiswaModule.showModalDelete(${row.id_personal_name})" data-placement="top" title="hapus">
-                <i class="nav-icon fas fa-trash fa-sm"></i>
-                </button>
-        
-                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="loadDataEdit(${row.id_personal_name})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
-                    <i class="nav-icon fas fa-pen fa-sm"></i>
-                </button>
-                </td>
-            `;
+                new_row.html(`
+                    <td>${startNumber + index + 1}</td>
+                    <td>${row.product_name}</td>
+                    <td>${row.brand_info.brand_name}</td>
+                    <td>${row.brand_info.brand_address}</td>
+                    <td>${price_idr}</td>
+                    <td>${row.sold_item}</td>
+                    <td class="text-center">
+                        <button type="button"
+                            class="btn btn-secondary btn-sm bg-primary border-0"
+                            data-placement="top" title="hapus">
+                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                        </button>
+                        <button type="button"
+                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                            data-placement="top" title="edit">
+                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                        </button>
+                    </td>
+                `);
 
-                tbody.appendChild(new_row);
+                tbody.append(new_row); // Use jQuery's append method to add the row to the tbody
             });
         }
+
 
         function renderPagination(total_pages, current_page, total_data) {
             if (total_data.length === 0) {
@@ -626,8 +753,6 @@
             prevLink.addEventListener("click", function () {
                 if (current_page > 1) {
                     fetchDataAndRender(current_page - 1);
-
-                    master_mahasiswa_sessions.current_page = current_page - 1;
                 }
             });
 
@@ -639,6 +764,7 @@
 
             paginationLinks.appendChild(ul);
         }
+
     </script>
 </body>
 

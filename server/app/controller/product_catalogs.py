@@ -3,6 +3,7 @@ from app.controller import product_brands
 from app import response, app, db
 from datetime import datetime, timedelta
 from flask import request
+import math
 
 def getAllProductCatalogs():
     try:
@@ -28,6 +29,10 @@ def getAllProductCatalogsAdmin():
         page = int(request.args.get('page', 1))
         limit = 5
         offset = (page - 1) * limit if (page - 1) * limit == 0 else (page - 1) * limit
+        catalogs = ProductCatalogs.query.all()
+        total_data = len(catalogs)
+        total_pages = math.ceil(total_data / limit)
+        
         catalog_list = ProductCatalogs.query.offset(offset).limit(limit).all()
         data = []
         for catalog in catalog_list:
@@ -41,7 +46,7 @@ def getAllProductCatalogsAdmin():
                 'brand_id': catalog.brand_id,
                 'brand_info': product_brands.singleTransform(int(catalog.brand_id))
             })
-        return response.ok(data, "success fetch data")
+        return response.okAdmin(data, total_pages, "success fetch data")
     except Exception as error:
         print(f'Failed to connect: {error}')
 
