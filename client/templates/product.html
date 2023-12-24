@@ -491,13 +491,6 @@
     </footer>
     <script src="../static/plugins/jquery/jquery.min.js"></script>
     <script>
-        var myCarousel = document.querySelector('#carouselExampleSlidesOnly')
-        var carousel = new bootstrap.Carousel(myCarousel, {
-            interval: 2000,
-            wrap: true,
-            Touch: true
-        })
-
         $.ajax({
             type: "GET",
             url: "http://127.0.0.1:3000/product-catalogs",
