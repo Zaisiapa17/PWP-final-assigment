@@ -2,6 +2,7 @@ from app.model.customers import Customers
 from app import response, app, db
 from datetime import datetime
 from flask import request
+import math
 
 
 def getAllCustomers():
@@ -13,10 +14,31 @@ def getAllCustomers():
                 'id': customer.id,
                 'name': customer.name,
                 'email': customer.email,
-                'phone': customer.phone,
-                'password': customer.password
+                'phone': customer.phone
             })
         return response.ok(data, "success fetch data")
+    except Exception as error:
+        print(f'Failed to connect: {error}')
+
+def getAllCustomersAdmin():
+    try:
+        page = int(request.args.get('page', 1))
+        limit = 5
+        offset = (page - 1) * limit if (page - 1) * limit == 0 else (page - 1) * limit
+        catalogs = Customers.query.all()
+        total_data = len(catalogs)
+        total_pages = math.ceil(total_data / limit)
+        
+        customer_list = Customers.query.offset(offset).limit(limit).all()
+        data = []
+        for customer in customer_list:
+            data.append({
+                'id': customer.id,
+                'name': customer.name,
+                'email': customer.email,
+                'phone': customer.phone
+            })
+        return response.okAdmin(data, total_pages, "success fetch data")
     except Exception as error:
         print(f'Failed to connect: {error}')
 

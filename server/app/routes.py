@@ -121,6 +121,10 @@ def deleteProductcatalog(id):
 def getCustomers():
     return customers.getAllCustomers()
 
+@app.route('/admin/customers', methods=['GET'])
+def getCustomersAdmin():
+    return customers.getAllCustomersAdmin()
+
 @app.route('/customers/<id>', methods=['GET'])
 def getCustomer(id):
     return customers.getCustomerById(id)
