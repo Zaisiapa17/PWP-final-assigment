@@ -491,6 +491,47 @@
     </footer>
     <script src="../static/plugins/jquery/jquery.min.js"></script>
     <script>
+        // Function to generate product card HTML
+        function generateProductCard(item) {
+            let price = item.price;
+            let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
+
+            return (`
+                <div class="card" style="width: 12rem; cursor: pointer;">
+                    <img src="https://via.placeholder.com/640x630?text=3" class="card-img-top" alt="...">
+                    <div class="card-body p-2 py-3">
+                        <h6 class="card-text">${item.product_name}</h6>
+                        <h5 class="card-title">Rp${price_idr}</h5>
+                        <span class="badge bg-light text-success">${item.brand_info.brand_address}</span>
+                        <span class="d-block badge text-secondary text-start fw-normal">${item.sold_item} terjual</span>
+                    </div>
+                </div>
+            `);
+        }
+
+        // Function to generate product items based on specific criteria
+        function generateProductItems(container, products, criteria, maxItems) {
+            container.html('');
+            let totalItems = 0;
+
+            for (let i = 0; i < products.length; i++) {
+                let currentItem = products[i];
+
+                if (!criteria(currentItem)) {
+                    continue;
+                }
+
+                let item = generateProductCard(currentItem);
+                container.append(item);
+
+                totalItems++;
+                if (totalItems >= maxItems) {
+                    break;
+                }
+            }
+        }
+
+
         $.ajax({
             type: "GET",
             url: "http://127.0.0.1:3000/product-catalogs",
@@ -499,87 +540,14 @@
             },
             success: function (respond) {
 
-                // genrate items for produk terlaris
-                const container_best_product = $("#produk-terlaris");
-                container_best_product.html('');
-                const best_product = respond.values;
-                let total_item_best_product = 0;
-                for (let i = 0; i < best_product.length; i++) {
-                    let current_item = best_product[i];
-                    let price = current_item.price;
-                    let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
-                    if (current_item.sold_item < 50) {
-                        continue;
-                    }
-                    let item = (`
-                                <div class="card" style="width: 12rem; cursor: pointer;">
-                                    <img src="https://via.placeholder.com/640x630?text=3" class="card-img-top" alt="...">
-                                    <div class="card-body p-2 py-3">
-                                        <h6 class="card-text">${current_item.product_name}</h6>
-                                        <h5 class="card-title">Rp${price_idr}</h5>
-                                        <span class="badge bg-light text-success">${current_item.brand_info.brand_address}</span>
-                                        <span class="d-block badge text-secondary text-start fw-normal">${current_item.sold_item} terjual</span>
-                                    </div>
-                                </div>
-                    `);
-                    total_item_best_product++;
-                    if (total_item_best_product > 5) {
-                        continue;
-                    }
-                    container_best_product.append(item);
-                }
+                // Usage for produk terlaris
+                generateProductItems($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 50, 5);
 
-                // genrate items for produk populer
-                const container_popular_product = $("#produk-populer");
-                container_popular_product.html('');
-                const popular_product = respond.values;
-                let total_item_popular_product = 0;
-                for (let i = 0; i < popular_product.length; i++) {
-                    let current_item = popular_product[i];
-                    let price = current_item.price;
-                    let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
-                    if (current_item.price < 100000) {
-                        continue;
-                    }
-                    let item = (`
-                                <div class="card" style="width: 12rem; cursor: pointer;">
-                                    <img src="https://via.placeholder.com/640x630?text=3" class="card-img-top" alt="...">
-                                    <div class="card-body p-2 py-3">
-                                        <h6 class="card-text">${current_item.product_name}</h6>
-                                        <h5 class="card-title">Rp${price_idr}</h5>
-                                        <span class="badge bg-light text-success">${current_item.brand_info.brand_address}</span>
-                                        <span class="d-block badge text-secondary text-start fw-normal">${current_item.sold_item} terjual</span>
-                                    </div>
-                                </div>
-                    `);
-                    total_item_popular_product++;
-                    if (total_item_popular_product > 5) {
-                        continue;
-                    }
-                    container_popular_product.append(item);
-                }
+                // Usage for produk populer
+                generateProductItems($("#produk-populer"), respond.values, (item) => item.price >= 100000, 5);
 
-                // genrate items for rekomendasi untukmu
-                const container_all_products = $("#produk-rekomendasi");
-                container_all_products.html('');
-                const all_products = respond.values;
-                for (let i = 0; i < all_products.length; i++) {
-                    let current_item = all_products[i];
-                    let price = current_item.price;
-                    let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
-                    let item = (`
-                                <div class="card" style="width: 12rem; cursor: pointer;">
-                                    <img src="https://via.placeholder.com/640x630?text=3" class="card-img-top" alt="...">
-                                    <div class="card-body p-2 py-3">
-                                        <h6 class="card-text">${current_item.product_name}</h6>
-                                        <h5 class="card-title">Rp${price_idr}</h5>
-                                        <span class="badge bg-light text-success">${current_item.brand_info.brand_address}</span>
-                                        <span class="d-block badge text-secondary text-start fw-normal">${current_item.sold_item} terjual</span>
-                                    </div>
-                                </div>
-                    `);
-                    container_all_products.append(item);
-                }
+                // Usage for rekomendasi untukmu
+                generateProductItems($("#produk-rekomendasi"), respond.values, () => true, Infinity);
             },
             error: function () {
                 alertError("Error");
