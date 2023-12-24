@@ -94,6 +94,10 @@ def deleteProductBrand(id):
 def getProductcatalogs():
     return product_catalogs.getAllProductCatalogs()
 
+@app.route('/admin/product-catalogs', methods=['GET'])
+def getProductcatalogsAdmin():
+    return product_catalogs.getAllProductCatalogsAdmin()
+
 @app.route('/product-catalogs/<id>', methods=['GET'])
 def getProductcatalog(id):
     return product_catalogs.getProductCatalogCatalogById(id)

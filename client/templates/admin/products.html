@@ -516,6 +516,130 @@
     <script src="../static/admin/static/plugins/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
     <script src="../static/admin/static/plugins/AdminLTE/dist/js/adminlte.js"></script>
+
+    <script>
+        function fetchDataAndRender(page) {
+            $.ajax({
+                url: buildUrl(page),
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    renderData(response.data, page);
+                    renderPagination(response.totalPages, page, response.data);
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        };
+
+        function renderData(data, current_page) {
+            const table = $("#data-table");
+            const tbody = table.querySelector("tbody");
+            tbody.innerHTML = ""; // Clear the existing table body content
+
+            const startNumber = (current_page - 1) * 5;
+
+            data.forEach(function (row, index) {
+                const new_row = document.createElement("tr");
+                const bac_color_number_class = row.total_rows > 0 ? "badge badge-warning" : "badge badge-danger";
+
+                new_row.innerHTML = `
+                <td class="text-center align-middle">${startNumber + index + 1}</td>
+                <td class="text-center align-middle"><img class="img-thumbnail" src="docs/img/${row.image_profile}" alt="" width="40px"></td>
+                <td class="text-center align-middle">${row.kode}</td>
+                <td class="text-center align-middle">${row.nama}</td>
+                <td class="text-center align-middle">${row.jenis_kelamin}</td>
+                <td class="text-center align-middle">
+                <a href="javascript:void(0)" class="${bac_color_number_class}" onclick="tampilModalMahasiswaSubPage(${row.id_personal_name})">${row.total_rows}</a>
+                </td>
+                <td class="text-center align-middle">${row.nama_desa}, ${row.nama_kecamatan}, ${row.nama_kabupaten}, ${row.nama_provinsi}</td>
+                <td class="p-sm-2 text-center align-middle">
+                <!-- Button with a click event to open the modal -->
+                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="MahasiswaModule.showModalDelete(${row.id_personal_name})" data-placement="top" title="hapus">
+                <i class="nav-icon fas fa-trash fa-sm"></i>
+                </button>
+        
+                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="loadDataEdit(${row.id_personal_name})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                    <i class="nav-icon fas fa-pen fa-sm"></i>
+                </button>
+                </td>
+            `;
+
+                tbody.appendChild(new_row);
+            });
+        }
+
+        function renderPagination(total_pages, current_page, total_data) {
+            if (total_data.length === 0) {
+                total_pages = 0;
+                current_page = 0;
+            }
+            const paginationLinks = document.getElementById("pagination-links");
+            paginationLinks.innerHTML = "";
+
+            const ul = document.createElement("ul");
+            ul.classList.add("pagination", "pagination-sm", "m-0");
+
+            const prevLi = document.createElement("li");
+            prevLi.classList.add("page-item");
+            if (current_page === 1 || current_page === 0) {
+                prevLi.classList.add("disabled");
+            }
+            const prevLink = document.createElement("a");
+            prevLink.classList.add("page-link");
+            prevLink.href = "javascript:void(0)";
+            prevLink.textContent = "Sebelumnya";
+            prevLi.appendChild(prevLink);
+            ul.appendChild(prevLi);
+
+            for (let i = 1; i <= total_pages; i++) {
+                const li = document.createElement("li");
+                li.classList.add("page-item");
+                if (i === current_page) {
+                    li.classList.add("active");
+                }
+                const link = document.createElement("a");
+                link.classList.add("page-link");
+                link.href = "javascript:void(0)";
+                link.textContent = i;
+                li.appendChild(link);
+                ul.appendChild(li);
+
+                link.addEventListener("click", function () {
+                    fetchDataAndRender(i);
+                });
+            }
+
+            const nextLi = document.createElement("li");
+            nextLi.classList.add("page-item");
+            if (current_page === total_pages) {
+                nextLi.classList.add("disabled");
+            }
+            const nextLink = document.createElement("a");
+            nextLink.classList.add("page-link");
+            nextLink.href = "javascript:void(0)";
+            nextLink.textContent = "Berikutnya";
+            nextLi.appendChild(nextLink);
+            ul.appendChild(nextLi);
+
+            prevLink.addEventListener("click", function () {
+                if (current_page > 1) {
+                    fetchDataAndRender(current_page - 1);
+
+                    master_mahasiswa_sessions.current_page = current_page - 1;
+                }
+            });
+
+            nextLink.addEventListener("click", function () {
+                if (current_page < total_pages) {
+                    fetchDataAndRender(current_page + 1);
+                }
+            });
+
+            paginationLinks.appendChild(ul);
+        }
+    </script>
 </body>
 
 </html>

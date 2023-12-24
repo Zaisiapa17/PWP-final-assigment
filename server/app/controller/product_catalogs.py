@@ -23,6 +23,28 @@ def getAllProductCatalogs():
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+def getAllProductCatalogsAdmin():
+    try:
+        page = int(request.args.get('page', 1))
+        limit = 5
+        offset = (page - 1) * limit if (page - 1) * limit == 0 else (page - 1) * limit
+        catalog_list = ProductCatalogs.query.offset(offset).limit(limit).all()
+        data = []
+        for catalog in catalog_list:
+            data.append({
+                'id': catalog.id,
+                'product_name': catalog.product_name,
+                'type': catalog.type,
+                'price': catalog.price,
+                'image': catalog.image,
+                'sold_item': catalog.sold_item,
+                'brand_id': catalog.brand_id,
+                'brand_info': product_brands.singleTransform(int(catalog.brand_id))
+            })
+        return response.ok(data, "success fetch data")
+    except Exception as error:
+        print(f'Failed to connect: {error}')
+
 def getProductCatalogCatalogById(id):
     try:
         catalog = ProductCatalogs.query.filter_by(id=id).first()
