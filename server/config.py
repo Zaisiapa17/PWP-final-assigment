@@ -11,3 +11,5 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_RECORD_QUERIES = True
     JWT_SECRET_KEY = str(os.environ.get("JWT_SECRET"))
+    UPLOAD_FOLDER = 'C:/Users/Alie/Documents/KAMPUS UTY/Semester 3/Pemrograman Web Praktek/final-assigment/server/files_uploaded/img'
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}

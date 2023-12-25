@@ -316,25 +316,46 @@
                         <div class="modal-body">
                             <div class="container">
                                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form action="">
+                                <form id="productForm" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="item-name-add">Nama Barang</label>
-                                                <input type="text" class="form-control" id="item-name-add"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <label for="customFile-add">Unggah Gambar</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFile-add"
+                                                        name="image_add">
+                                                    <label class="custom-file-label" for="customFile-add"></label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="brand-add">Brand</label>
-                                                <select class="custom-select" id="brand-add">
+                                                <label for="item-name-add">Nama Barang</label>
+                                                <input type="text" class="form-control" name="product_name_add"
+                                                    id="item-name-add" placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-type-add">Tipe</label>
+                                                <input type="text" class="form-control" name="type_add"
+                                                    id="item-type-add" placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-brand-add">Brand</label>
+                                                <select class="custom-select" id="item-brand-add" name="brand_id_add">
                                                     <option selected>Pilih...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="1">Brand A Indonesia</option>
+                                                    <option value="2">Brand B Indonesia</option>
+                                                    <option value="3">Brand C Indonesia</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -342,18 +363,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="item-location-add">Lokasi</label>
-                                                <input type="text" class="form-control" id="item-location-add"
-                                                    placeholder="" oninput="" autocomplete="off">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
                                                 <label for="item-price-add">Harga</label>
-                                                <input type="text" class="form-control" id="item-price-add"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" name="price_add"
+                                                    id="item-price-add" placeholder="" oninput="" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -361,19 +373,19 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="item-sold-add">Terjual</label>
-                                                <input type="text" class="form-control" id="item-sold-add"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" name="sold_item_add"
+                                                    id="item-sold-add" placeholder="" oninput="" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-primary" id="button-add"><i
+                                            class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                     class="nav-icon fas fa-times mr-1"></i> Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="" id="button-add"><i
-                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -591,10 +603,11 @@
                                                     <span class="page-link">Sebelumnya</span>
                                                 </li>
                                                 <li class="page-item"><a class="page-link" href="#">
-                                                    <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
-                                                        <span class="sr-only">Loading...</span>
-                                                    </div>
-                                                </a></li>
+                                                        <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                            role="status">
+                                                            <span class="sr-only">Loading...</span>
+                                                        </div>
+                                                    </a></li>
                                                 <li class="page-item disabled">
                                                     <a class="page-link" href="#">Berikutnya</a>
                                                 </li>
@@ -635,12 +648,40 @@
     <script src="../static/admin/static/plugins/AdminLTE/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../static/admin/static/plugins/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script
+        src="../static/admin/static/plugins/AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- AdminLTE -->
     <script src="../static/admin/static/plugins/AdminLTE/dist/js/adminlte.js"></script>
 
+
     <script>
         $(document).ready(function () {
+            $(function () {
+                bsCustomFileInput.init();
+            });
             fetchDataAndRender(1);
+            $('#productForm').submit(function (event) {
+            event.preventDefault();
+
+            // Create FormData object for the form
+            var formData = new FormData(this);
+
+            // Send FormData (including files) to the server using AJAX
+            $.ajax({
+                url: 'http://127.0.0.1:3000/product-catalogs',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
         });
 
         function fetchDataAndRender(page) {
@@ -765,6 +806,35 @@
             paginationLinks.appendChild(ul);
         }
 
+        const addProduct = () => {
+            // alert('Add Product');
+            const name = $("#item-name-add").val();
+            const typeP = $("#item-type-add").val();
+            const brand = $("#item-brand-add").val();
+            const price = $("#item-price-add").val();
+            const sold = $("#item-sold-add").val();
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:3000/product-catalogs",
+                data: JSON.stringify({
+                    product_name: name,
+                    type: typeP,
+                    brand_id: brand,
+                    price: price,
+                    sold_item: sold,
+                    image_profile: $("#customFile-add")[0].files[0]
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (responsText) {
+                    $('#modal-add').modal('hide');
+                },
+                error: function (xhr, statusText) {
+                    alert("Terjadi kesalahan: " + statusText);
+                }
+            });
+        }
     </script>
 </body>
 

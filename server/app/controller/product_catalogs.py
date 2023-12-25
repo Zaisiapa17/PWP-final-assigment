@@ -1,9 +1,14 @@
 from app.model.product_catalogs import ProductCatalogs
 from app.controller import product_brands
 from app import response, app, db
-from datetime import datetime, timedelta
-from flask import request
+from datetime import datetime
+from flask import request, jsonify
+from werkzeug.utils import secure_filename
 import math
+import os
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 def getAllProductCatalogs():
     try:
@@ -92,19 +97,48 @@ def getProductCatalogByBrandId(id):
 
 def insertProductCatalog():
     try:
-        name = request.json['product_name']
-        type_pdk = request.json['type']
-        brand_id = request.json['brand_id']
-        image = request.json['image']
-        price = request.json['price']
-        sold_item = request.json['sold_item']
+        # Extracting data from form
+        name = request.form['product_name_add']
+        type_pdk = request.form['type_add']
+        brand_id = request.form['brand_id_add']
+        price = request.form['price_add']
+        sold_item = request.form['sold_item_add']
 
-        catalog = ProductCatalogs(product_name=name, type=type_pdk, image=image, price=price, sold_item=sold_item, brand_id=brand_id)
-        db.session.add(catalog)
-        db.session.commit()
-        return response.ok([], "Catalogs added successfully")
+        # Handling file upload
+        if 'image_add' not in request.files:
+            return jsonify(error="No file part"), 400
+
+        file = request.files['image_add']
+
+        if file.filename == '':
+            return jsonify(error="No selected file"), 400
+
+        if file and allowed_file(file.filename):
+            # Save the file with a secure filename
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            # Create ProductCatalogs instance and add to the database
+            catalog = ProductCatalogs(
+                product_name=name,
+                type=type_pdk,
+                image=filename,
+                price=price,
+                sold_item=sold_item,
+                brand_id=brand_id
+            )
+            
+            db.session.add(catalog)
+            db.session.commit()
+
+            return jsonify(message="Product added successfully"), 200
+
+        return jsonify(error="Invalid file type"), 400
+
     except Exception as error:
         print(f'Failed to connect: {error}')
+        return jsonify(error="Internal server error"), 500
+
 
 def updateProductCatalog(id):
     try:

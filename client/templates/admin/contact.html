@@ -35,6 +35,73 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #969696;
         }
+
+        .placeholder {
+            display: inline-block;
+            min-height: 1em;
+            vertical-align: middle;
+            cursor: wait;
+            background-color: currentColor;
+            opacity: .5
+        }
+
+        .placeholder.btn::before {
+            display: inline-block;
+            content: ""
+        }
+
+        .placeholder-xs {
+            min-height: .6em
+        }
+
+        .placeholder-sm {
+            min-height: .8em
+        }
+
+        .placeholder-lg {
+            min-height: 1.2em
+        }
+
+        .placeholder-glow .placeholder {
+            -webkit-animation: placeholder-glow 2s ease-in-out infinite;
+            animation: placeholder-glow 2s ease-in-out infinite
+        }
+
+        @-webkit-keyframes placeholder-glow {
+            50% {
+                opacity: .2
+            }
+        }
+
+        @keyframes placeholder-glow {
+            50% {
+                opacity: .2
+            }
+        }
+
+        .placeholder-wave {
+            -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+            mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+            -webkit-mask-size: 200% 100%;
+            mask-size: 200% 100%;
+            -webkit-animation: placeholder-wave 2s linear infinite;
+            animation: placeholder-wave 2s linear infinite
+        }
+
+        @-webkit-keyframes placeholder-wave {
+            100% {
+                -webkit-mask-position: -200% 0%;
+                mask-position: -200% 0%
+            }
+        }
+
+        @keyframes placeholder-wave {
+            100% {
+                -webkit-mask-position: -200% 0%;
+                mask-position: -200% 0%
+            }
+        }
+
     </style>
 </head>
 <!--
@@ -303,11 +370,19 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Batik Bagus</td>
-                                                    <td>batikbagus@example.com</td>
-                                                    <td>08123456789</td>
-                                                    <td class="text-center">
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
                                                         <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
@@ -315,59 +390,87 @@
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
-                                                </tr>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Batik Cantik</td>
-                                                    <td>batikcantik@example.com</td>
-                                                    <td>08234567890</td>
-                                                    <td class="text-center">
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
                                                         <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
-                                                </tr>
                                                 <tr>
-                                                    <td>3</td>
-                                                    <td>Batik Indah</td>
-                                                    <td>batikindah@example.com</td>
-                                                    <td>08345678901</td>
-                                                    <td class="text-center">
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
                                                         <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
-                                                </tr>
                                                 <tr>
-                                                    <td>4</td>
-                                                    <td>Batik Jaya</td>
-                                                    <td>batikjaya@example.com</td>
-                                                    <td>08456789012</td>
-                                                    <td class="text-center">
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
                                                         <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
-                                                </tr>
                                                 <tr>
-                                                    <td>5</td>
-                                                    <td>Batik Berkah</td>
-                                                    <td>batikberkah@example.com</td>
-                                                    <td>08567890123</td>
-                                                    <td class="text-center">
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
                                                         <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
@@ -382,15 +485,15 @@
                                         <nav aria-label="..." id="pagination-links">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item disabled">
-                                                    <span class="page-link">Previous</span>
+                                                    <span class="page-link">Sebelumnya</span>
                                                 </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active" aria-current="page">
-                                                    <span class="page-link">2</span>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#">Next</a>
+                                                <li class="page-item"><a class="page-link" href="#">
+                                                    <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                </a></li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#">Berikutnya</a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -431,6 +534,131 @@
     <script src="../static/admin/static/plugins/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
     <script src="../static/admin/static/plugins/AdminLTE/dist/js/adminlte.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            fetchDataAndRender(1);
+        });
+
+        function fetchDataAndRender(page) {
+            $.ajax({
+                url: `http://127.0.0.1:3000/admin/customers?page=${page}`,
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    renderData(response.values, page);
+                    renderPagination(response.total_page, page, response.values);
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        };
+
+        function renderData(data, current_page) {
+            const table = $("#data-table");
+            const tbody = table.find("tbody"); // Use jQuery's find method instead of querySelector
+            tbody.empty(); // Use jQuery's empty method to clear the existing table body content
+
+            const startNumber = (current_page - 1) * 5;
+
+            data.forEach(function (row, index) {
+                const new_row = $("<tr></tr>"); // Create a new jQuery object for the row
+
+                new_row.html(`
+                    <td>${startNumber + index + 1}</td>
+                    <td>${row.name}</td>
+                    <td>${row.email}</td>
+                    <td>${row.phone}</td>
+                    <td class="text-center" style="width: 1px;">
+                        <button type="button"
+                            class="btn btn-secondary btn-sm bg-primary border-0"
+                            data-placement="top" title="hapus">
+                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                        </button>
+                        <button type="button"
+                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                            data-placement="top" title="edit">
+                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                        </button>
+                    </td>
+                `);
+
+                tbody.append(new_row); // Use jQuery's append method to add the row to the tbody
+            });
+        }
+
+
+        function renderPagination(total_pages, current_page, total_data) {
+            if (total_data.length === 0) {
+                total_pages = 0;
+                current_page = 0;
+            }
+            const paginationLinks = document.getElementById("pagination-links");
+            paginationLinks.innerHTML = "";
+
+            const ul = document.createElement("ul");
+            ul.classList.add("pagination", "pagination-sm", "m-0");
+
+            const prevLi = document.createElement("li");
+            prevLi.classList.add("page-item");
+            if (current_page === 1 || current_page === 0) {
+                prevLi.classList.add("disabled");
+            }
+            const prevLink = document.createElement("a");
+            prevLink.classList.add("page-link");
+            prevLink.href = "javascript:void(0)";
+            prevLink.textContent = "Sebelumnya";
+            prevLi.appendChild(prevLink);
+            ul.appendChild(prevLi);
+
+            for (let i = 1; i <= total_pages; i++) {
+                const li = document.createElement("li");
+                li.classList.add("page-item");
+                if (i === current_page) {
+                    li.classList.add("active");
+                }
+                const link = document.createElement("a");
+                link.classList.add("page-link");
+                link.href = "javascript:void(0)";
+                link.textContent = i;
+                li.appendChild(link);
+                ul.appendChild(li);
+
+                link.addEventListener("click", function () {
+                    fetchDataAndRender(i);
+                });
+            }
+
+            const nextLi = document.createElement("li");
+            nextLi.classList.add("page-item");
+            if (current_page === total_pages) {
+                nextLi.classList.add("disabled");
+            }
+            const nextLink = document.createElement("a");
+            nextLink.classList.add("page-link");
+            nextLink.href = "javascript:void(0)";
+            nextLink.textContent = "Berikutnya";
+            nextLi.appendChild(nextLink);
+            ul.appendChild(nextLi);
+
+            prevLink.addEventListener("click", function () {
+                if (current_page > 1) {
+                    fetchDataAndRender(current_page - 1);
+                }
+            });
+
+            nextLink.addEventListener("click", function () {
+                if (current_page < total_pages) {
+                    fetchDataAndRender(current_page + 1);
+                }
+            });
+
+            paginationLinks.appendChild(ul);
+        }
+
+    </script>
 </body>
 
 </html>
