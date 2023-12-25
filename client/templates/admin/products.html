@@ -239,25 +239,49 @@
                         <div class="modal-body">
                             <div class="container">
                                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form action="">
+                                <form id="product-form-edit" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="customFile-edit">Unggah Gambar</label>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFile-edit"
+                                                        name="image_edit">
+                                                    <label class="custom-file-label" for="customFile-edit" id="label-img-edit"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="https://via.placeholder.com/100x100?text=" class="card-img-top" alt="..." id="show-img-edit" style="width: 100px;">
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="item-name-edit">Nama Barang</label>
-                                                <input type="text" class="form-control" id="item-name-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" name="product_name_edit"
+                                                    id="item-name-edit" placeholder="" oninput="" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="brand-edit">Brand</label>
-                                                <select class="custom-select" id="brand-edit">
+                                                <label for="item-type-edit">Tipe</label>
+                                                <input type="text" class="form-control" name="type_edit"
+                                                    id="item-type-edit" placeholder="" oninput="" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="item-brand-edit">Brand</label>
+                                                <select class="custom-select" id="item-brand-edit" name="brand_id_edit">
                                                     <option selected>Pilih...</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                    <option value="1">Brand A Indonesia</option>
+                                                    <option value="2">Brand B Indonesia</option>
+                                                    <option value="3">Brand C Indonesia</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -265,18 +289,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="item-location-edit">Lokasi</label>
-                                                <input type="text" class="form-control" id="item-location-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
                                                 <label for="item-price-edit">Harga</label>
-                                                <input type="text" class="form-control" id="item-price-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" name="price_edit"
+                                                    id="item-price-edit" placeholder="" oninput="" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
@@ -284,11 +299,12 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="item-sold-edit">Terjual</label>
-                                                <input type="text" class="form-control" id="item-sold-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" name="sold_item_edit"
+                                                    id="item-sold-edit" placeholder="" oninput="" autocomplete="off">
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="d-none">Simpan</button>
                                 </form>
                             </div>
                         </div>
@@ -316,7 +332,7 @@
                         <div class="modal-body">
                             <div class="container">
                                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form id="productForm" enctype="multipart/form-data">
+                                <form id="product-form-add" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -324,7 +340,7 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="customFile-add"
                                                         name="image_add">
-                                                    <label class="custom-file-label" for="customFile-add"></label>
+                                                    <label class="custom-file-label" for="customFile-add" id="label-img-add"></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -378,14 +394,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" id="button-add"><i
-                                            class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                                    <button type="submit" class="d-none">Simpan</button>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                     class="nav-icon fas fa-times mr-1"></i> Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="addProduct()"><i
+                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                         </div>
                     </div>
                 </div>
@@ -404,7 +421,7 @@
                                     <h5 class="card-title m-0">
                                         <div class="d-flex align-content-center flex-wrap">
                                             <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
-                                                data-target="#modal-add" onclick="">
+                                                data-target="#modal-add" onclick="resetFormAdd()">
                                                 <i class="nav-icon fas fa-plus mr-1"></i>
                                                 Tambah
                                             </button>
@@ -661,27 +678,28 @@
                 bsCustomFileInput.init();
             });
             fetchDataAndRender(1);
-            $('#productForm').submit(function (event) {
-            event.preventDefault();
+            $('#product-form-add').submit(function (event) {
+                event.preventDefault();
 
-            // Create FormData object for the form
-            var formData = new FormData(this);
+                // Create FormData object for the form
+                var formData = new FormData(this);
 
-            // Send FormData (including files) to the server using AJAX
-            $.ajax({
-                url: 'http://127.0.0.1:3000/product-catalogs',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                }
+                // Send FormData (including files) to the server using AJAX
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/product-catalogs',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        alert('success');
+                        $('#modal-add').modal('hide');
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
             });
-        });
         });
 
         function fetchDataAndRender(page) {
@@ -724,10 +742,8 @@
                             data-placement="top" title="hapus">
                             <i class="nav-icon fas fa-trash fa-sm"></i>
                         </button>
-                        <button type="button"
-                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
-                            data-toggle="modal" data-target="#staticBackdrop-edit"
-                            data-placement="top" title="edit">
+                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                            data-toggle="modal" data-placement="top" title="edit" onclick="fetchForEdit(${row.id})">
                             <i class="nav-icon fas fa-pen fa-sm"></i>
                         </button>
                     </td>
@@ -806,35 +822,70 @@
             paginationLinks.appendChild(ul);
         }
 
-        const addProduct = () => {
-            // alert('Add Product');
-            const name = $("#item-name-add").val();
-            const typeP = $("#item-type-add").val();
-            const brand = $("#item-brand-add").val();
-            const price = $("#item-price-add").val();
-            const sold = $("#item-sold-add").val();
+        function resetFormAdd() {
+            // Reset the form by setting the values of the form elements to empty strings or default values
+            document.getElementById("product-form-add").reset();
 
+            // Optionally, you can also reset the custom file input label
+            var customFileLabel = document.getElementById('label-img-add');
+            customFileLabel.textContent = "Pilih File";
+        }
+
+        const addProduct = () => {
+            // Create FormData object for the form
+            var formData = new FormData($('#product-form-add')[0]);
+
+            // Send FormData (including files) to the server using AJAX
             $.ajax({
-                type: "POST",
-                url: "http://127.0.0.1:3000/product-catalogs",
-                data: JSON.stringify({
-                    product_name: name,
-                    type: typeP,
-                    brand_id: brand,
-                    price: price,
-                    sold_item: sold,
-                    image_profile: $("#customFile-add")[0].files[0]
-                }),
-                contentType: "application/json",
-                dataType: "json",
-                success: function (responsText) {
+                url: 'http://127.0.0.1:3000/product-catalogs',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
                     $('#modal-add').modal('hide');
                 },
-                error: function (xhr, statusText) {
-                    alert("Terjadi kesalahan: " + statusText);
+                error: function (error) {
+                    console.error('Error:', error);
                 }
             });
         }
+
+        const fetchForEdit = (product_id) => {
+            $.ajax({
+                url: `http://127.0.0.1:3000/product-catalogs/${product_id}`,
+                type: "GET",
+                dataType: "json",
+                beforeSend: function () {
+                },
+                success: function (response) {
+                    const values = response.values[0]
+
+                    $("#item-name-edit").val(values.product_name);
+                    $("#item-type-edit").val(values.type);
+                    $("#item-brand-edit").val(values.brand_info.id);
+                    $("#item-price-edit").val(values.price);
+                    $("#item-sold-edit").val(values.sold_item);
+                    $("#show-img-edit").attr("src", "http://localhost:3000/get-image/" + values.image);
+                    var customFileLabel = document.getElementById('label-img-edit');
+                    customFileLabel.textContent = values.image;
+
+                    $('#modal-edit').modal('show');
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        const editProduct = () => {
+
+        }
+
+
     </script>
 </body>
 

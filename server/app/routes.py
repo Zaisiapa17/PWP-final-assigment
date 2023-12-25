@@ -4,6 +4,7 @@ from app.controller import product_catalogs
 from app.controller import users
 from app.controller import todos
 from app.controller import customers
+from flask import send_from_directory
 
 @app.route('/')
 @app.route('/index')
@@ -113,6 +114,14 @@ def updateProductcatalog(id):
 @app.route('/product-catalogs/<id>', methods=['DELETE'])
 def deleteProductcatalog(id):
     return product_catalogs.deleteProductCatalog(id)
+
+@app.route('/get-image/<path:filename>')
+def getImage(filename):
+    directory = app.config['UPLOAD_FOLDER']
+
+    return send_from_directory(directory, filename)
+
+
 
 
 

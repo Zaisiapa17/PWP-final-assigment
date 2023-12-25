@@ -67,7 +67,9 @@ def getProductCatalogCatalogById(id):
                 'type': catalog.type,
                 'price': catalog.price,
                 'image': catalog.image,
-                'sold_item': catalog.sold_item
+                'sold_item': catalog.sold_item,
+                'brand_id': catalog.brand_id,
+                'brand_info': product_brands.singleTransform(int(catalog.brand_id))
         }
 
         return response.ok([data], "success fetch data")
