@@ -21,13 +21,7 @@
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/640x270?text=1" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://via.placeholder.com/640x270?text=2" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://via.placeholder.com/640x270?text=3" class="d-block w-100" alt="...">
+                            <img src="../static/img/main.jpg" class="d-block w-100" alt="...">
                         </div>
                     </div>
                 </div>
@@ -510,7 +504,7 @@
                     <div class="card" style="width: 12rem; cursor: pointer;">
                         <img src="http://localhost:3000/get-image/${currentItem.image}" class="card-img-top" alt="...">
                         <div class="card-body p-2 py-3">
-                            <h6 class="card-text">${currentItem.product_name}</h6>
+                            <h6 class="card-text custom-card-title">${currentItem.product_name}</h6>
                             <h5 class="card-title">Rp${price_idr}</h5>
                             <span class="badge bg-light text-success">${currentItem.brand_info.brand_address}</span>
                             <span class="d-block badge text-secondary text-start fw-normal">${currentItem.sold_item} terjual</span>
@@ -537,10 +531,10 @@
             success: function (respond) {
 
             // Usage for produk terlaris
-            generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 50, 5);
+            generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 100, 6);
 
             // Usage for produk populer
-            generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 100000, 5);
+            generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 135000, 6);
 
             // Usage for rekomendasi untukmu
             generateAndAppendProducts($("#produk-rekomendasi"), respond.values, () => true, Infinity);

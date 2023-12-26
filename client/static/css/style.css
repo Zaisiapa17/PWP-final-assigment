@@ -35,3 +35,18 @@
 @media only screen and (min-width: 1201px) {
     /* Styles for screens wider than 1200px */
 }
+
+.custom-card-title {
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    white-space: pre-wrap !important;
+    word-break: keep-all !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    margin-bottom: 4px !important;
+    min-height: 16px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+}

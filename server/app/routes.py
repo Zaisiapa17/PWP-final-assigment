@@ -117,7 +117,7 @@ def deleteProductcatalog(id):
 
 @app.route('/get-image/<path:filename>')
 def getImage(filename):
-    directory = app.config['UPLOAD_FOLDER']
+    directory = app.config['WATCH_FOLDER']
 
     return send_from_directory(directory, filename)
 
