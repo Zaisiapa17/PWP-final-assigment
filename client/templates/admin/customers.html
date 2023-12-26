@@ -226,80 +226,6 @@
 
             <!-- modal -->
 
-            <!-- modal edit-->
-            <div class="modal fade" id="modal-edit" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Edit Pelanggan</h5>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                    class="fas fa-times"></i></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form action="">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="name-edit">Nama</label>
-                                                <input type="text" class="form-control" id="name-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
-                                    class="nav-icon fas fa-times mr-1"></i> Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="" id="button-edit"><i
-                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.modal edit-->
-
-            <!-- modal add-->
-            <div class="modal fade" id="modal-add" data-backdrop="static" data-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Add Pelanggan</h5>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                    class="fas fa-times"></i></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form action="">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="name-add">Nama</label>
-                                                <input type="text" class="form-control" id="name-add"
-                                                    placeholder="" oninput="" autocomplete="off">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
-                                    class="nav-icon fas fa-times mr-1"></i> Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="" id="button-add"><i
-                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.modal add-->
-
             <!-- /.modal -->
 
             <!-- Main content -->
@@ -308,17 +234,6 @@
                     <div class="row">
                         <div class="col">
                             <div class="card card-primary card-outline">
-                                <div class="card-header pb-sm-3">
-                                    <h5 class="card-title m-0">
-                                        <div class="d-flex align-content-center flex-wrap">
-                                            <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
-                                                data-target="#modal-add" onclick="">
-                                                <i class="nav-icon fas fa-plus mr-1"></i>
-                                                Tambah
-                                            </button>
-                                        </div>
-                                    </h5>
-                                </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
                                         <table
@@ -327,7 +242,6 @@
                                             <thead style="color: #3d3d3d;">
                                                 <th width="1px">No</th>
                                                 <th>Nama</th>
-                                                <th class="text-center">Aksi</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -502,19 +416,6 @@
                 new_row.html(`
                     <td>${startNumber + index + 1}</td>
                     <td>${row.name}</td>
-                    <td class="text-center" style="width: 1px;">
-                        <button type="button"
-                            class="btn btn-secondary btn-sm bg-primary border-0"
-                            data-placement="top" title="hapus">
-                            <i class="nav-icon fas fa-trash fa-sm"></i>
-                        </button>
-                        <button type="button"
-                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
-                            data-toggle="modal" data-target="#staticBackdrop-edit"
-                            data-placement="top" title="edit">
-                            <i class="nav-icon fas fa-pen fa-sm"></i>
-                        </button>
-                    </td>
                 `);
 
                 tbody.append(new_row); // Use jQuery's append method to add the row to the tbody
@@ -589,7 +490,6 @@
 
             paginationLinks.appendChild(ul);
         }
-
     </script>
 </body>
 
