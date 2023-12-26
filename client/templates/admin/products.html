@@ -129,7 +129,7 @@
                             <img src="https://via.placeholder.com/40x40?text=" alt="..." class="rounded-circle">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">Alie nih bous</a>
+                            <a href="#" class="d-block">{{ session['username'] }}</a>
                         </div>
                     </div>
                 </li>
@@ -138,7 +138,7 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <a class="nav-link" href="/admin/logout">
                         <i class="fas fa-sign-out-alt fa-lg"></i>
                     </a>
                 </li>

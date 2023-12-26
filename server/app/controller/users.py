@@ -17,8 +17,9 @@ def refresh():
 
 def login():
     try:
-        name = request.json['name']
-        password = request.json['password']
+        # data = request.form
+        name = request.form['name']
+        password = request.form['password']
 
         user = Users.query.filter_by(name=name).first()
         if not user:
