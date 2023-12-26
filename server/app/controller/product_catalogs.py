@@ -6,9 +6,45 @@ from flask import request, jsonify
 from werkzeug.utils import secure_filename
 import math
 import os
+from PIL import Image
+import secrets
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+def crop_and_save_image(input_file, output_path, target_width, target_height):
+    img = Image.open(input_file)
+    
+    # Calculate the aspect ratio of the target dimensions
+    target_aspect_ratio = target_width / target_height
+    
+    # Calculate the aspect ratio of the original image
+    original_aspect_ratio = img.width / img.height
+    
+    if original_aspect_ratio > target_aspect_ratio:
+        # Crop the width
+        new_width = int(target_height * original_aspect_ratio)
+        img = img.resize((new_width, target_height), Image.LANCZOS)
+        
+        left_margin = (new_width - target_width) / 2
+        right_margin = left_margin + target_width
+        top_margin = 0
+        bottom_margin = target_height
+    else:
+        # Crop the height
+        new_height = int(target_width / original_aspect_ratio)
+        img = img.resize((target_width, new_height), Image.LANCZOS)
+        
+        left_margin = 0
+        right_margin = target_width
+        top_margin = (new_height - target_height) / 2
+        bottom_margin = top_margin + target_height
+    
+    # Crop the image
+    cropped_img = img.crop((left_margin, top_margin, right_margin, bottom_margin))
+    
+    # Save the cropped image
+    cropped_img.save(output_path)
 
 def getAllProductCatalogs():
     try:
@@ -116,9 +152,13 @@ def insertProductCatalog():
             return jsonify(error="No selected file"), 400
 
         if file and allowed_file(file.filename):
-            # Save the file with a secure filename
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # Generate a random filename
+            random_filename = secrets.token_hex(16)
+            filename = 'cropped_' + random_filename + '.' + file.filename.rsplit('.', 1)[1].lower()
+            
+            # Save the cropped file with the random filename
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            crop_and_save_image(file, file_path, target_width=188, target_height=190)
 
             # Create ProductCatalogs instance and add to the database
             catalog = ProductCatalogs(
