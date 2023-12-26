@@ -3,6 +3,7 @@ from app import response, app, db
 from datetime import datetime
 from flask import request
 import math
+from flask_jwt_extended import *
 
 
 def getAllCustomers():
@@ -20,6 +21,8 @@ def getAllCustomers():
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+
+@jwt_required()
 def getAllCustomersAdmin():
     try:
         page = int(request.args.get('page', 1))
@@ -42,6 +45,7 @@ def getAllCustomersAdmin():
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def getCustomerById(id):
     try:
         customer = Customers.query.filter_by(id=id).first()
@@ -60,6 +64,7 @@ def getCustomerById(id):
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def insertCustomer():
     try:
         name = request.form['kontact_name_add']
@@ -75,6 +80,7 @@ def insertCustomer():
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def updateCustomer(id):
     try:
         customer = Customers.query.filter_by(id=id).first()
@@ -98,6 +104,7 @@ def updateCustomer(id):
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def deleteCustomer(id):
     try:
         customer = Customers.query.filter_by(id=id).first()

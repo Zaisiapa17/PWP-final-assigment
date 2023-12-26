@@ -596,6 +596,9 @@
                 $.ajax({
                     url: 'http://127.0.0.1:3000/customers',
                     type: 'POST',
+                    headers: {
+                        'Authorization': `Bearer {{ session['token_access'] }}`
+                    },
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -621,6 +624,9 @@
                 $.ajax({
                     url: 'http://127.0.0.1:3000/customers/' + produt_id,
                     type: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer {{ session['token_access'] }}`
+                    },
                     data: formData,
                     contentType: false,
                     processData: false,
@@ -646,6 +652,9 @@
             $.ajax({
                 url: `http://127.0.0.1:3000/admin/customers?page=${page}`,
                 type: "GET",
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
                 dataType: "json",
                 success: function (response) {
                     renderData(response.values, page);
@@ -782,6 +791,9 @@
             $.ajax({
                 url: 'http://127.0.0.1:3000/customers',
                 type: 'POST',
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -800,6 +812,9 @@
             $.ajax({
                 url: `http://127.0.0.1:3000//customers/${customer_id}`,
                 type: "GET",
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
                 dataType: "json",
                 beforeSend: function () {
                     resetFormEdit()
@@ -831,6 +846,9 @@
             $.ajax({
                 url: 'http://127.0.0.1:3000/customers/' + id,
                 type: 'PUT',
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -849,18 +867,21 @@
             var strconfirm = confirm("yakin mau di hapus?");
             if (strconfirm == true) {
                 $.ajax({
-                url: 'http://127.0.0.1:3000/customers/' + id,
-                type: 'DELETE',
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    alert('success');
-                    fetchDataAndRender(1);
-                },
-                error: function (error) {
-                    console.error('Error:', error);
-                }
-            });
+                    url: 'http://127.0.0.1:3000/customers/' + id,
+                    type: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer {{ session['token_access'] }}`
+                    },
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        alert('success');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
             }
         }
     </script>
