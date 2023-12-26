@@ -126,7 +126,7 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel d-flex">
                         <div class="image">
-                            <img src="https://via.placeholder.com/40x40?text=" alt="..." class="rounded-circle">
+                            <img src="../static/admin/static/img/avatar5.png" alt="{{ session['username'] }}" class="rounded-circle">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">{{ session['username'] }}</a>
@@ -151,8 +151,7 @@
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <div class="image">
-                    <img src="https://via.placeholder.com/40x40?text=" alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <img src="../static/admin/static/img/zxoopp-01.png" alt="Logo" class="brand-image img-circle" style="opacity: .8">
                 </div>
                 <span class="brand-text font-weight-light">Webzet.dev</span>
             </a>
@@ -352,6 +351,9 @@
             $.ajax({
                 url: `http://127.0.0.1:3000/admin/customers?page=${page}`,
                 type: "GET",
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
                 dataType: "json",
                 success: function (response) {
                     renderData(response.values, page);
