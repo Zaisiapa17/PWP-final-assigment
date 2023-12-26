@@ -181,26 +181,44 @@ def insertProductCatalog():
         print(f'Failed to connect: {error}')
         return jsonify(error="Internal server error"), 500
 
-
 def updateProductCatalog(id):
     try:
         catalog = ProductCatalogs.query.filter_by(id=id).first()
         if not catalog:
-            return response.badRequest([], "catalog not found")
+            return response.badRequest([], "Catalog not found")
 
-        # Update catalog fields if present in the request JSON
-        if 'product_name' in request.json:
-            catalog.product_name = request.json['product_name']
-        if 'type' in request.json:
-            catalog.type = request.json['type']
-        if 'image' in request.json:
-            catalog.image = request.json['image']
-        if 'price' in request.json:
-            catalog.price = request.json['price']
-        if 'sold_item' in request.json:
-            catalog.sold_item = request.json['sold_item']
-        if 'brand_id' in request.json:
-            catalog.brand_id = request.json['brand_id']
+        # Update catalog fields if present and not empty/undefined in the request JSON
+        if 'product_name_edit' in request.form and request.form['product_name_edit']:
+            catalog.product_name = request.form['product_name_edit']
+            
+        if 'type_edit' in request.form and request.form['type_edit']:
+            catalog.type = request.form['type_edit']
+            
+
+        file = request.files['image_edit']
+        if file.filename != '':
+
+            if file and allowed_file(file.filename):
+                # Generate a random filename
+                random_filename = secrets.token_hex(16)
+                filename = 'cropped_' + random_filename + '.' + file.filename.rsplit('.', 1)[1].lower()
+                
+                # Save the cropped file with the random filename
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                crop_and_save_image(file, file_path, target_width=188, target_height=190)
+
+                catalog.image = filename
+            else:
+                return jsonify(error="Invalid file type"), 400
+            
+        if 'price_edit' in request.form and request.form['price_edit']:
+            catalog.price = request.form['price_edit']
+            
+        if 'sold_item_edit' in request.form and request.form['sold_item_edit']:
+            catalog.sold_item = request.form['sold_item_edit']
+            
+        if 'brand_id_edit' in request.form and request.form['brand_id_edit']:
+            catalog.brand_id = request.form['brand_id_edit']
 
         catalog.updated_at = datetime.utcnow()
         db.session.commit()
@@ -208,7 +226,6 @@ def updateProductCatalog(id):
         return response.ok([], "Success update data")
     except Exception as error:
         print(f'Failed to connect: {error}')
-        # return response.internalServerError([], "Failed to update user data")
 
 def deleteProductCatalog(id):
     try:

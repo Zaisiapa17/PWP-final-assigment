@@ -247,12 +247,14 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="customFile-edit"
                                                         name="image_edit">
-                                                    <label class="custom-file-label" for="customFile-edit" id="label-img-edit"></label>
+                                                    <label class="custom-file-label" for="customFile-edit"
+                                                        id="label-img-edit"></label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <img src="https://via.placeholder.com/100x100?text=" class="card-img-top" alt="..." id="show-img-edit" style="width: 100px;">
+                                            <img src="https://via.placeholder.com/100x100?text=" class="card-img-top"
+                                                alt="..." id="show-img-edit" style="width: 100px;">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -261,6 +263,7 @@
                                                 <label for="item-name-edit">Nama Barang</label>
                                                 <input type="text" class="form-control" name="product_name_edit"
                                                     id="item-name-edit" placeholder="" oninput="" autocomplete="off">
+                                                <input type="hidden" id="product-id-edit">
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +314,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                     class="nav-icon fas fa-times mr-1"></i> Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="" id="button-edit"><i
+                            <button type="submit" class="btn btn-primary" onclick="editProduct()" id="button-edit"><i
                                     class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                         </div>
                     </div>
@@ -340,7 +343,8 @@
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="customFile-add"
                                                         name="image_add">
-                                                    <label class="custom-file-label" for="customFile-add" id="label-img-add"></label>
+                                                    <label class="custom-file-label" for="customFile-add"
+                                                        id="label-img-add"></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -694,6 +698,31 @@
                     success: function (data) {
                         alert('success');
                         $('#modal-add').modal('hide');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+            $('#product-form-edit').submit(function (event) {
+                event.preventDefault();
+
+                const produt_id = $("#product-id-edit").val();
+                // Create FormData object for the form
+                var formData = new FormData(this);
+
+                // Send FormData (including files) to the server using AJAX
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/product-catalogs/' + produt_id,
+                    type: 'PUT',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        alert('success');
+                        $('#modal-edit').modal('hide');
+                        fetchDataAndRender(1);
                     },
                     error: function (error) {
                         console.error('Error:', error);
@@ -739,7 +768,7 @@
                     <td class="text-center" style="width: 1px;">
                         <button type="button"
                             class="btn btn-secondary btn-sm bg-primary border-0"
-                            data-placement="top" title="hapus">
+                            data-placement="top" title="hapus" onclick="deleteProduct(${row.id})">
                             <i class="nav-icon fas fa-trash fa-sm"></i>
                         </button>
                         <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
@@ -831,6 +860,15 @@
             customFileLabel.textContent = "Pilih File";
         }
 
+        function resetFormEdit() {
+            // Reset the form by setting the values of the form elements to empty strings or default values
+            document.getElementById("product-form-edit").reset();
+
+            // Optionally, you can also reset the custom file input label
+            var customFileLabel = document.getElementById('label-img-add');
+            customFileLabel.textContent = "Pilih File";
+        }
+
         const addProduct = () => {
             // Create FormData object for the form
             var formData = new FormData($('#product-form-add')[0]);
@@ -845,6 +883,7 @@
                 success: function (data) {
                     alert('success');
                     $('#modal-add').modal('hide');
+                    fetchDataAndRender(1);
                 },
                 error: function (error) {
                     console.error('Error:', error);
@@ -858,10 +897,12 @@
                 type: "GET",
                 dataType: "json",
                 beforeSend: function () {
+                    resetFormEdit()
                 },
                 success: function (response) {
                     const values = response.values[0]
 
+                    $("#product-id-edit").val(product_id);
                     $("#item-name-edit").val(values.product_name);
                     $("#item-type-edit").val(values.type);
                     $("#item-brand-edit").val(values.brand_info.id);
@@ -871,21 +912,57 @@
                     var customFileLabel = document.getElementById('label-img-edit');
                     customFileLabel.textContent = "Pilih File";
 
-                    $('#modal-edit').modal('show');
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
                 },
                 complete: function () {
+                    $('#modal-edit').modal('show');
                 }
             });
         }
 
         const editProduct = () => {
+            const produt_id = $("#product-id-edit").val();
+            // Create FormData object for the form
+            var formData = new FormData($('#product-form-edit')[0]);
 
+            // Send FormData (including files) to the server using AJAX
+            $.ajax({
+                url: 'http://127.0.0.1:3000/product-catalogs/' + produt_id,
+                type: 'PUT',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    $('#modal-edit').modal('hide');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
         }
 
-
+        const deleteProduct = (id) => {
+            var strconfirm = confirm("yakin mau di hapus?");
+            if (strconfirm == true) {
+                $.ajax({
+                url: 'http://127.0.0.1:3000/product-catalogs/' + id,
+                type: 'DELETE',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+            }
+        }
     </script>
 </body>
 
