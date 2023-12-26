@@ -8,6 +8,8 @@ import math
 import os
 from PIL import Image
 import secrets
+from flask_jwt_extended import *
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
@@ -65,6 +67,7 @@ def getAllProductCatalogs():
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def getAllProductCatalogsAdmin():
     try:
         page = int(request.args.get('page', 1))
@@ -133,6 +136,7 @@ def getProductCatalogByBrandId(id):
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def insertProductCatalog():
     try:
         # Extracting data from form
@@ -181,6 +185,7 @@ def insertProductCatalog():
         print(f'Failed to connect: {error}')
         return jsonify(error="Internal server error"), 500
 
+@jwt_required()
 def updateProductCatalog(id):
     try:
         catalog = ProductCatalogs.query.filter_by(id=id).first()
@@ -227,6 +232,7 @@ def updateProductCatalog(id):
     except Exception as error:
         print(f'Failed to connect: {error}')
 
+@jwt_required()
 def deleteProductCatalog(id):
     try:
         catalog = ProductCatalogs.query.filter_by(id=id).first()
