@@ -101,7 +101,6 @@
                 mask-position: -200% 0%
             }
         }
-
     </style>
 </head>
 <!--
@@ -240,13 +239,14 @@
                         <div class="modal-body">
                             <div class="container">
                                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form action="">
+                                <form id="customer-form-edit">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="name-edit">Nama</label>
-                                                <input type="text" class="form-control" id="name-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" id="name-edit" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_name_edit">
+                                                <input type="hidden" id="contact-id-edit">
                                             </div>
                                         </div>
                                     </div>
@@ -254,8 +254,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="email-edit">Email</label>
-                                                <input type="text" class="form-control" id="email-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" id="email-edit" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_email_edit">
                                             </div>
                                         </div>
                                     </div>
@@ -263,18 +263,29 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="phone-edit">No Hp</label>
-                                                <input type="text" class="form-control" id="phone-edit"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" id="phone-edit" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_phone_edit">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="password-edit">New Password</label>
+                                                <input type="text" class="form-control" id="password-edit"
+                                                    placeholder="" oninput="" autocomplete="off"
+                                                    name="kontact_password_edit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="d-none">Simpan</button>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                     class="nav-icon fas fa-times mr-1"></i> Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="" id="button-edit"><i
+                            <button type="submit" class="btn btn-primary" onclick="editCustomer()" id="button-edit"><i
                                     class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                         </div>
                     </div>
@@ -295,13 +306,13 @@
                         <div class="modal-body">
                             <div class="container">
                                 <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                <form action="">
+                                <form id="customer-form-add">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="name-add">Nama</label>
-                                                <input type="text" class="form-control" id="name-add"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" id="name-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_name_add">
                                             </div>
                                         </div>
                                     </div>
@@ -309,8 +320,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="email-add">Email</label>
-                                                <input type="text" class="form-control" id="email-add"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" id="email-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_email_add">
                                             </div>
                                         </div>
                                     </div>
@@ -318,18 +329,28 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="phone-add">No Hp</label>
-                                                <input type="text" class="form-control" id="phone-add"
-                                                    placeholder="" oninput="" autocomplete="off">
+                                                <input type="text" class="form-control" id="phone-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_phone_add">
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="password-add">Password</label>
+                                                <input type="text" class="form-control" id="password-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_password_add">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="d-none">Simpan</button>
                                 </form>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                     class="nav-icon fas fa-times mr-1"></i> Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="" id="button-add"><i
+                            <button type="submit" class="btn btn-primary" onclick="addCustomer()" id="button-add"><i
                                     class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                         </div>
                     </div>
@@ -383,10 +404,15 @@
                                                         <span class="placeholder col-12"></span>
                                                     </td>
                                                     <td class="text-center" style="width: 1px;">
-                                                        <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
@@ -404,10 +430,15 @@
                                                         <span class="placeholder col-12"></span>
                                                     </td>
                                                     <td class="text-center" style="width: 1px;">
-                                                        <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
@@ -425,10 +456,15 @@
                                                         <span class="placeholder col-12"></span>
                                                     </td>
                                                     <td class="text-center" style="width: 1px;">
-                                                        <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
@@ -446,10 +482,15 @@
                                                         <span class="placeholder col-12"></span>
                                                     </td>
                                                     <td class="text-center" style="width: 1px;">
-                                                        <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
@@ -467,16 +508,21 @@
                                                         <span class="placeholder col-12"></span>
                                                     </td>
                                                     <td class="text-center" style="width: 1px;">
-                                                        <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" data-placement="top" title="hapus">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
                                                             <i class="nav-icon fas fa-trash fa-sm"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" data-toggle="modal" data-target="#modal-edit" data-placement="top" title="edit">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
                                                             <i class="nav-icon fas fa-pen fa-sm"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                            
+
                                         </table>
                                     </div>
                                 </div>
@@ -488,10 +534,11 @@
                                                     <span class="page-link">Sebelumnya</span>
                                                 </li>
                                                 <li class="page-item"><a class="page-link" href="#">
-                                                    <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
-                                                        <span class="sr-only">Loading...</span>
-                                                    </div>
-                                                </a></li>
+                                                        <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                            role="status">
+                                                            <span class="sr-only">Loading...</span>
+                                                        </div>
+                                                    </a></li>
                                                 <li class="page-item disabled">
                                                     <a class="page-link" href="#">Berikutnya</a>
                                                 </li>
@@ -538,6 +585,61 @@
     <script>
         $(document).ready(function () {
             fetchDataAndRender(1);
+
+            $('#customer-form-add').submit(function (event) {
+                event.preventDefault();
+
+                // Create FormData object for the form
+                var formData = new FormData(this);
+
+                // Send FormData (including files) to the server using AJAX
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/customers',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        alert('success');
+                        $('#modal-add').modal('hide');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            $('#customer-form-edit').submit(function (event) {
+                event.preventDefault();
+
+                const produt_id = $("#contact-id-edit").val();
+                // Create FormData object for the form
+                var formData = new FormData(this);
+
+                // Send FormData (including files) to the server using AJAX
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/customers/' + produt_id,
+                    type: 'PUT',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'PUT',
+                        'Access-Control-Allow-Headers': 'Content-Type',
+                    },
+                    success: function (data) {
+                        alert('success');
+                        $('#modal-edit').modal('hide');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+
+            });
         });
 
         function fetchDataAndRender(page) {
@@ -573,13 +675,13 @@
                     <td class="text-center" style="width: 1px;">
                         <button type="button"
                             class="btn btn-secondary btn-sm bg-primary border-0"
-                            data-placement="top" title="hapus">
+                            data-placement="top" title="hapus" onclick="deleteCustomer(${row.id})">
                             <i class="nav-icon fas fa-trash fa-sm"></i>
                         </button>
                         <button type="button"
                             class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
                             data-toggle="modal" data-target="#staticBackdrop-edit"
-                            data-placement="top" title="edit">
+                            data-placement="top" title="edit" onclick="fetchForEdit(${row.id})">
                             <i class="nav-icon fas fa-pen fa-sm"></i>
                         </button>
                     </td>
@@ -658,6 +760,109 @@
             paginationLinks.appendChild(ul);
         }
 
+        function resetFormAdd() {
+            // Reset the form by setting the values of the form elements to empty strings or default values
+            document.getElementById("product-form-add").reset();
+
+            // Optionally, you can also reset the custom file input label
+            var customFileLabel = document.getElementById('label-img-add');
+            customFileLabel.textContent = "Pilih File";
+        }
+
+        function resetFormEdit() {
+            // Reset the form by setting the values of the form elements to empty strings or default values
+            document.getElementById("customer-form-edit").reset();
+        }
+
+        const addCustomer = () => {
+            // Create FormData object for the form
+            var formData = new FormData($('#customer-form-add')[0]);
+
+            // Send FormData (including files) to the server using AJAX
+            $.ajax({
+                url: 'http://127.0.0.1:3000/customers',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    $('#modal-add').modal('hide');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        const fetchForEdit = (customer_id) => {
+            $.ajax({
+                url: `http://127.0.0.1:3000//customers/${customer_id}`,
+                type: "GET",
+                dataType: "json",
+                beforeSend: function () {
+                    resetFormEdit()
+                },
+                success: function (response) {
+                    const values = response.values[0]
+
+                    $("#contact-id-edit").val(customer_id);
+                    $("#name-edit").val(values.name);
+                    $("#email-edit").val(values.email);
+                    $("#phone-edit").val(values.phone);
+
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                },
+                complete: function () {
+                    $('#modal-edit').modal('show');
+                }
+            });
+        }
+
+        const editCustomer = () => {
+            const id = $("#contact-id-edit").val();
+            // Create FormData object for the form
+            var formData = new FormData($('#customer-form-edit')[0]);
+
+            // Send FormData (including files) to the server using AJAX
+            $.ajax({
+                url: 'http://127.0.0.1:3000/customers/' + id,
+                type: 'PUT',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    $('#modal-edit').modal('hide');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        const deleteCustomer = (id) => {
+            var strconfirm = confirm("yakin mau di hapus?");
+            if (strconfirm == true) {
+                $.ajax({
+                url: 'http://127.0.0.1:3000/customers/' + id,
+                type: 'DELETE',
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+            }
+        }
     </script>
 </body>
 

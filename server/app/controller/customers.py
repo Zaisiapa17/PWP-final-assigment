@@ -62,10 +62,10 @@ def getCustomerById(id):
 
 def insertCustomer():
     try:
-        name = request.json['name']
-        email = request.json['email']
-        phone = request.json['phone']
-        password = request.json['password']
+        name = request.form['kontact_name_add']
+        email = request.form['kontact_email_add']
+        phone = request.form['kontact_phone_add']
+        password = request.form['kontact_password_add']
 
         customer = Customers(name=name, email=email, phone=phone)
         customer.setPassword(password)
@@ -82,14 +82,14 @@ def updateCustomer(id):
             return response.badRequest([], "customer not found")
 
         # Update customer fields if present in the request JSON
-        if 'name' in request.json:
-            customer.name = request.json['name']
-        if 'email' in request.json:
-            customer.email = request.json['email']
-        if 'phone' in request.json:
-            customer.phone = request.json['phone']
-        if 'password' in request.json:
-            customer.setPassword(request.json['password'])
+        if 'kontact_name_edit' in request.form and request.form['kontact_name_edit']:
+            customer.name = request.form['kontact_name_edit']
+        if 'kontact_email_edit' in request.form and request.form['kontact_email_edit']:
+            customer.email = request.form['kontact_email_edit']
+        if 'kontact_phone_edit' in request.form and request.form['kontact_phone_edit']:
+            customer.phone = request.form['kontact_phone_edit']
+        if 'kontact_password_edit' in request.form and request.form['kontact_password_edit']:
+            customer.setPassword(request.form['kontact_password_edit'])
 
         customer.updated_at = datetime.utcnow()
         db.session.commit()
@@ -97,7 +97,6 @@ def updateCustomer(id):
         return response.ok([], "Success update data")
     except Exception as error:
         print(f'Failed to connect: {error}')
-        # return response.internalServerError([], "Failed to update user data")
 
 def deleteCustomer(id):
     try:
