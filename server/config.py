@@ -14,3 +14,6 @@ class Config(object):
     UPLOAD_FOLDER = './files_uploaded/img'
     WATCH_FOLDER = os.path.join(basedir, 'files_uploaded', 'img')
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+    
+
+# test
