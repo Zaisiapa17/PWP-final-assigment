@@ -6,6 +6,29 @@ import math
 from flask_jwt_extended import *
 
 
+def login():
+    try:
+        email = request.form['email']
+        password = request.form['password']
+
+        customer = Customers.query.filter_by(email=email).first()
+        if not customer:
+            return response.badRequest([], "Customer not found")
+
+        if not customer.checkPassword(password):
+            return response.badRequest([], "Password incorrect")
+
+        data = {
+            'id': customer.id,
+            'name': customer.name,
+            'email': customer.email,
+            'phone': customer.phone
+        }
+        
+        return response.ok({'data': data}, "Login successful")
+    except Exception as error:
+        print(f'Failed to connect: {error}')
+
 def getAllCustomers():
     try:
         customer_list = Customers.query.all()
@@ -20,7 +43,6 @@ def getAllCustomers():
         return response.ok(data, "success fetch data")
     except Exception as error:
         print(f'Failed to connect: {error}')
-
 
 @jwt_required()
 def getAllCustomersAdmin():
@@ -64,7 +86,6 @@ def getCustomerById(id):
     except Exception as error:
         print(f'Failed to connect: {error}')
 
-@jwt_required()
 def insertCustomer():
     try:
         name = request.form['kontact_name_add']

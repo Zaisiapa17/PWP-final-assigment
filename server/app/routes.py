@@ -130,6 +130,10 @@ def getImage(filename):
 def getCustomers():
     return customers.getAllCustomers()
 
+@app.route('/customers-login', methods=['POST'])
+def loginCustomers():
+    return customers.login()
+
 @app.route('/admin/customers', methods=['GET'])
 def getCustomersAdmin():
     return customers.getAllCustomersAdmin()
@@ -138,7 +142,7 @@ def getCustomersAdmin():
 def getCustomer(id):
     return customers.getCustomerById(id)
 
-@app.route('/customers', methods=['POST'])
+@app.route('/customers-signIn', methods=['POST'])
 def addCustomer():
     return customers.insertCustomer()
 
