@@ -126,7 +126,8 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel d-flex">
                         <div class="image">
-                            <img src="../static/admin/static/img/avatar5.png" alt="{{ session['username'] }}" class="rounded-circle">
+                            <img src="../static/admin/static/img/avatar5.png" alt="{{ session['username'] }}"
+                                class="rounded-circle">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">{{ session['username'] }}</a>
@@ -151,7 +152,8 @@
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <div class="image">
-                    <img src="../static/admin/static/img/zxoopp-01.png" alt="Logo" class="brand-image img-circle" style="opacity: .8">
+                    <img src="../static/admin/static/img/zxoopp-01.png" alt="Logo" class="brand-image img-circle"
+                        style="opacity: .8">
                 </div>
                 <span class="brand-text font-weight-light">Webzet.dev</span>
             </a>
@@ -814,22 +816,39 @@
             prevLi.appendChild(prevLink);
             ul.appendChild(prevLi);
 
-            for (let i = 1; i <= total_pages; i++) {
-                const li = document.createElement("li");
-                li.classList.add("page-item");
-                if (i === current_page) {
-                    li.classList.add("active");
-                }
-                const link = document.createElement("a");
-                link.classList.add("page-link");
-                link.href = "javascript:void(0)";
-                link.textContent = i;
-                li.appendChild(link);
-                ul.appendChild(li);
+            const MAX_VISIBLE_PAGES = 3;
 
-                link.addEventListener("click", function () {
-                    fetchDataAndRender(i);
-                });
+            if (total_pages <= MAX_VISIBLE_PAGES) {
+                // Display all pages if the total number of pages is less than or equal to 3
+                for (let i = 1; i <= total_pages; i++) {
+                    createPageLink(i);
+                }
+            } else {
+                // Display pages with ellipsis
+                if (current_page <= MAX_VISIBLE_PAGES - 1) {
+                    // Display pages 1, 2, 3, ..., total_pages
+                    for (let i = 1; i <= MAX_VISIBLE_PAGES; i++) {
+                        createPageLink(i);
+                    }
+                    createEllipsis();
+                    createPageLink(total_pages);
+                } else if (current_page >= total_pages - MAX_VISIBLE_PAGES + 2) {
+                    // Display pages 1, ..., total_pages-2, total_pages-1, total_pages
+                    createPageLink(1);
+                    createEllipsis();
+                    for (let i = total_pages - MAX_VISIBLE_PAGES + 1; i <= total_pages; i++) {
+                        createPageLink(i);
+                    }
+                } else {
+                    // Display pages 1, ..., current_page, ..., total_pages
+                    createPageLink(1);
+                    createEllipsis();
+                    for (let i = current_page - 1; i <= current_page + 1; i++) {
+                        createPageLink(i);
+                    }
+                    createEllipsis();
+                    createPageLink(total_pages);
+                }
             }
 
             const nextLi = document.createElement("li");
@@ -857,7 +876,36 @@
             });
 
             paginationLinks.appendChild(ul);
+
+            function createPageLink(pageNumber) {
+                const li = document.createElement("li");
+                li.classList.add("page-item");
+                if (pageNumber === current_page) {
+                    li.classList.add("active");
+                }
+                const link = document.createElement("a");
+                link.classList.add("page-link");
+                link.href = "javascript:void(0)";
+                link.textContent = pageNumber;
+                li.appendChild(link);
+                ul.appendChild(li);
+
+                link.addEventListener("click", function () {
+                    fetchDataAndRender(pageNumber);
+                });
+            }
+
+            function createEllipsis() {
+                const li = document.createElement("li");
+                li.classList.add("page-item", "disabled");
+                const span = document.createElement("span");
+                span.classList.add("page-link");
+                span.textContent = "...";
+                li.appendChild(span);
+                ul.appendChild(li);
+            }
         }
+
 
         function resetFormAdd() {
             // Reset the form by setting the values of the form elements to empty strings or default values

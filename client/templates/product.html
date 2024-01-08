@@ -531,10 +531,10 @@
             success: function (respond) {
 
             // Usage for produk terlaris
-            generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 100, 5);
+            generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 100, 6);
 
             // Usage for produk populer
-            generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 135000, 5);
+            generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 105000, 6);
 
             // Usage for rekomendasi untukmu
             generateAndAppendProducts($("#produk-rekomendasi"), respond.values, () => true, Infinity);
