@@ -1,6 +1,6 @@
 FLASK APP=main.py
 DB_HOST=localhost
-DB_DATABASE=pw_praktek
-DB_USERNAME=alie
-DB_PASSWORD=kmzway76aa
+DB_DATABASE=db_toko
+DB_USERNAME=root
+DB_PASSWORD=
 JWT_SECRET=secretkey

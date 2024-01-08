@@ -2,9 +2,8 @@ from app import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 class Customers(db.Model):
-    
+
     def setPassword(self, password):
         self.password = generate_password_hash(password, method='pbkdf2:sha256')
 

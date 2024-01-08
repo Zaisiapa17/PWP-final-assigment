@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Halaman Daftar Pelanggan</title>
+    <title>Halaman Kontak</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -216,7 +216,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Daftar Pelanggan</h1>
+                            <h1 class="m-0">kontak</h1>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -224,6 +224,138 @@
             <!-- /.content-header -->
 
             <!-- modal -->
+
+            <!-- modal edit-->
+            <div class="modal fade" id="modal-edit" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit Kontak</h5>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                                <form id="customer-form-edit">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="name-edit">Nama</label>
+                                                <input type="text" class="form-control" id="name-edit" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_name_edit">
+                                                <input type="hidden" id="contact-id-edit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="email-edit">Email</label>
+                                                <input type="text" class="form-control" id="email-edit" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_email_edit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="phone-edit">No Hp</label>
+                                                <input type="text" class="form-control" id="phone-edit" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_phone_edit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="password-edit">New Password</label>
+                                                <input type="text" class="form-control" id="password-edit"
+                                                    placeholder="" oninput="" autocomplete="off"
+                                                    name="kontact_password_edit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="d-none">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
+                                    class="nav-icon fas fa-times mr-1"></i> Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="editCustomer()" id="button-edit"><i
+                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal edit-->
+
+            <!-- modal add-->
+            <div class="modal fade" id="modal-add" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Add Kontak</h5>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                                <form id="customer-form-add">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="name-add">Nama</label>
+                                                <input type="text" class="form-control" id="name-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_name_add">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="email-add">Email</label>
+                                                <input type="text" class="form-control" id="email-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_email_add">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="phone-add">No Hp</label>
+                                                <input type="text" class="form-control" id="phone-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_phone_add">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="password-add">Password</label>
+                                                <input type="text" class="form-control" id="password-add" placeholder=""
+                                                    oninput="" autocomplete="off" name="kontact_password_add">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="d-none">Simpan</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
+                                    class="nav-icon fas fa-times mr-1"></i> Close</button>
+                            <button type="submit" class="btn btn-primary" onclick="addCustomer()" id="button-add"><i
+                                    class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal add-->
 
             <!-- /.modal -->
 
@@ -233,6 +365,17 @@
                     <div class="row">
                         <div class="col">
                             <div class="card card-primary card-outline">
+                                <div class="card-header pb-sm-3">
+                                    <h5 class="card-title m-0">
+                                        <div class="d-flex align-content-center flex-wrap">
+                                            <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
+                                                data-target="#modal-add" onclick="">
+                                                <i class="nav-icon fas fa-plus mr-1"></i>
+                                                Tambah
+                                            </button>
+                                        </div>
+                                    </h5>
+                                </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
                                         <table
@@ -241,6 +384,9 @@
                                             <thead style="color: #3d3d3d;">
                                                 <th width="1px">No</th>
                                                 <th>Nama</th>
+                                                <th>Email</th>
+                                                <th>No Hp</th>
+                                                <th class="text-center">Aksi</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -250,7 +396,25 @@
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
                                                     </td>
-                                                </tr>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
                                                 <tr>
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
@@ -258,7 +422,25 @@
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
                                                     </td>
-                                                </tr>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
                                                 <tr>
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
@@ -266,7 +448,25 @@
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
                                                     </td>
-                                                </tr>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
                                                 <tr>
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
@@ -274,17 +474,54 @@
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
                                                     </td>
-                                                </tr>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
+                                                    </td>
                                                 <tr>
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
                                                     </td>
                                                     <td class="placeholder-glow">
                                                         <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="placeholder-glow">
+                                                        <span class="placeholder col-12"></span>
+                                                    </td>
+                                                    <td class="text-center" style="width: 1px;">
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm bg-primary border-0"
+                                                            data-placement="top" title="hapus">
+                                                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                                                            data-toggle="modal" data-target="#modal-edit"
+                                                            data-placement="top" title="edit">
+                                                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                            
+
                                         </table>
                                     </div>
                                 </div>
@@ -296,10 +533,11 @@
                                                     <span class="page-link">Sebelumnya</span>
                                                 </li>
                                                 <li class="page-item"><a class="page-link" href="#">
-                                                    <div class="spinner-grow spinner-grow-sm text-secondary" role="status">
-                                                        <span class="sr-only">Loading...</span>
-                                                    </div>
-                                                </a></li>
+                                                        <div class="spinner-grow spinner-grow-sm text-secondary"
+                                                            role="status">
+                                                            <span class="sr-only">Loading...</span>
+                                                        </div>
+                                                    </a></li>
                                                 <li class="page-item disabled">
                                                     <a class="page-link" href="#">Berikutnya</a>
                                                 </li>
@@ -342,9 +580,71 @@
     <script src="../static/admin/static/plugins/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
     <script src="../static/admin/static/plugins/AdminLTE/dist/js/adminlte.js"></script>
+
     <script>
         $(document).ready(function () {
             fetchDataAndRender(1);
+
+            $('#customer-form-add').submit(function (event) {
+                event.preventDefault();
+
+                // Create FormData object for the form
+                var formData = new FormData(this);
+
+                // Send FormData (including files) to the server using AJAX
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/customers',
+                    type: 'POST',
+                    headers: {
+                        'Authorization': `Bearer {{ session['token_access'] }}`
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        alert('success');
+                        $('#modal-add').modal('hide');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            $('#customer-form-edit').submit(function (event) {
+                event.preventDefault();
+
+                const produt_id = $("#contact-id-edit").val();
+                // Create FormData object for the form
+                var formData = new FormData(this);
+
+                // Send FormData (including files) to the server using AJAX
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/customers/' + produt_id,
+                    type: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer {{ session['token_access'] }}`
+                    },
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': 'PUT',
+                        'Access-Control-Allow-Headers': 'Content-Type',
+                    },
+                    success: function (data) {
+                        alert('success');
+                        $('#modal-edit').modal('hide');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+
+            });
         });
 
         function fetchDataAndRender(page) {
@@ -378,6 +678,21 @@
                 new_row.html(`
                     <td>${startNumber + index + 1}</td>
                     <td>${row.name}</td>
+                    <td>${row.email}</td>
+                    <td>${row.phone}</td>
+                    <td class="text-center" style="width: 1px;">
+                        <button type="button"
+                            class="btn btn-secondary btn-sm bg-primary border-0"
+                            data-placement="top" title="hapus" onclick="deleteCustomer(${row.id})">
+                            <i class="nav-icon fas fa-trash fa-sm"></i>
+                        </button>
+                        <button type="button"
+                            class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0"
+                            data-toggle="modal" data-target="#staticBackdrop-edit"
+                            data-placement="top" title="edit" onclick="fetchForEdit(${row.id})">
+                            <i class="nav-icon fas fa-pen fa-sm"></i>
+                        </button>
+                    </td>
                 `);
 
                 tbody.append(new_row); // Use jQuery's append method to add the row to the tbody
@@ -451,6 +766,122 @@
             });
 
             paginationLinks.appendChild(ul);
+        }
+
+        function resetFormAdd() {
+            // Reset the form by setting the values of the form elements to empty strings or default values
+            document.getElementById("product-form-add").reset();
+
+            // Optionally, you can also reset the custom file input label
+            var customFileLabel = document.getElementById('label-img-add');
+            customFileLabel.textContent = "Pilih File";
+        }
+
+        function resetFormEdit() {
+            // Reset the form by setting the values of the form elements to empty strings or default values
+            document.getElementById("customer-form-edit").reset();
+        }
+
+        const addCustomer = () => {
+            // Create FormData object for the form
+            var formData = new FormData($('#customer-form-add')[0]);
+
+            // Send FormData (including files) to the server using AJAX
+            $.ajax({
+                url: 'http://127.0.0.1:3000/customers',
+                type: 'POST',
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    $('#modal-add').modal('hide');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        const fetchForEdit = (customer_id) => {
+            $.ajax({
+                url: `http://127.0.0.1:3000//customers/${customer_id}`,
+                type: "GET",
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
+                dataType: "json",
+                beforeSend: function () {
+                    resetFormEdit()
+                },
+                success: function (response) {
+                    const values = response.values[0]
+
+                    $("#contact-id-edit").val(customer_id);
+                    $("#name-edit").val(values.name);
+                    $("#email-edit").val(values.email);
+                    $("#phone-edit").val(values.phone);
+
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                },
+                complete: function () {
+                    $('#modal-edit').modal('show');
+                }
+            });
+        }
+
+        const editCustomer = () => {
+            const id = $("#contact-id-edit").val();
+            // Create FormData object for the form
+            var formData = new FormData($('#customer-form-edit')[0]);
+
+            // Send FormData (including files) to the server using AJAX
+            $.ajax({
+                url: 'http://127.0.0.1:3000/customers/' + id,
+                type: 'PUT',
+                headers: {
+                    'Authorization': `Bearer {{ session['token_access'] }}`
+                },
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    alert('success');
+                    $('#modal-edit').modal('hide');
+                    fetchDataAndRender(1);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+
+        const deleteCustomer = (id) => {
+            var strconfirm = confirm("yakin mau di hapus?");
+            if (strconfirm == true) {
+                $.ajax({
+                    url: 'http://127.0.0.1:3000/customers/' + id,
+                    type: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer {{ session['token_access'] }}`
+                    },
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        alert('success');
+                        fetchDataAndRender(1);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
         }
     </script>
 </body>

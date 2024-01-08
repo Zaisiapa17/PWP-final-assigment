@@ -6,12 +6,48 @@ app.secret_key = 'ape lu suuu'
 
 # coustomers pages
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        email = request.form['email']
+        password = request.form['password']
+
+        api_url = 'http://127.0.0.1:3000/customers-login'
+        api_data = {'email': email, 'password': password}
+        response = requests.post(api_url, data=api_data)
+
+        if response.status_code == 200:
+            # Assuming the API returns a JSON response
+            api_response = response.json()
+
+            # Continue with the rest of your logic
+            session['customer_is_logged_in'] = True
+            session['customer_id'] = api_response['values']['data']['id']
+            session['customer_name'] = api_response['values']['data']['name']
+            session['customer_phone'] = api_response['values']['data']['phone']
+            session['customer_email'] = api_response['values']['data']['email']
+            return redirect(url_for('index'))
+
+    if session.get('customer_is_logged_in'):
+        return redirect(url_for('index'))
+
     return render_template('/login.html')
 
-@app.route("/daftar")
-def signIn():
+@app.route("/daftar", methods=['GET', 'POST'])
+def signUp():
+    if request.method == 'POST':
+        # Retrieve form data
+        name = request.form.get('kontact_name_add')
+        email = request.form.get('kontact_email_add')
+        phone = request.form.get('kontact_phone_add')
+        password = request.form.get('kontact_password_add')
+        
+        api_url = 'http://127.0.0.1:3000/customers-signIn'
+        api_data = {'kontact_name_add': name, 'kontact_email_add': email,'kontact_phone_add': phone , 'kontact_password_add': password}
+        response = requests.post(api_url, data=api_data)
+        if response.status_code == 200:
+            return redirect(url_for('login'))
+
     return render_template('/sign-in.html')
 
 @app.route("/")

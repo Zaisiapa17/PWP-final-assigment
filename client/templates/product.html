@@ -16,7 +16,35 @@
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row my-3">
+            <div class="col">
+                <nav class="navbar navbar-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand">Navbar</a>
+                        <div class="d-flex gap-3">
+                            <a class="nav-link text-black" aria-current="page" href="/index">Beranda</a>
+                            <a class="nav-link text-secondary border-bottom" href="/products">Produk</a>
+                            <a class="nav-link text-black" href="#">Kontak</a>
+                            {% if session['customer_is_logged_in'] %}
+                            <a href="#" class="btn btn-secondary position-relative rounded-pill">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span
+                                    class="position-absolute top-0 start-100 translate-middle badge rounded-3 bg-danger">
+                                    13
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </a>
+                            {% endif %}
+                            <div class="">
+
+                            </div>
+                            <a href="#" class="btn btn-outline-secondary">Login</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="row my-4">
             <div class="col">
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -25,15 +53,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row my-3">
-            <div class="col">
-                <nav class="nav justify-content-center  py-2 mx-4">
-                    <a class="nav-link text-black" aria-current="page" href="/index">Beranda</a>
-                    <a class="nav-link text-secondary border-bottom" href="/products">Produk</a>
-                    <a class="nav-link text-black" href="#">Kontak</a>
-                </nav>
             </div>
         </div>
         <div class="row">
@@ -501,7 +520,7 @@
                 let price_idr = price.toLocaleString('id-ID', { maximumFractionDigits: 0 });
 
                 let item = (`
-                    <div class="card" style="width: 12rem; cursor: pointer;">
+                    <div class="card" style="width: 12rem; cursor: pointer;" onclick="basketNotif(${currentItem.id}, '${currentItem.product_name}')">
                         <img src="http://localhost:3000/get-image/${currentItem.image}" class="card-img-top" alt="...">
                         <div class="card-body p-2 py-3">
                             <h6 class="card-text custom-card-title">${currentItem.product_name}</h6>
@@ -530,14 +549,22 @@
             },
             success: function (respond) {
 
+<<<<<<< HEAD
             // Usage for produk terlaris
             generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 100, 6);
 
             // Usage for produk populer
             generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 105000, 6);
+=======
+                // Usage for produk terlaris
+                generateAndAppendProducts($("#produk-terlaris"), respond.values, (item) => item.sold_item >= 100, 5);
 
-            // Usage for rekomendasi untukmu
-            generateAndAppendProducts($("#produk-rekomendasi"), respond.values, () => true, Infinity);
+                // Usage for produk populer
+                generateAndAppendProducts($("#produk-populer"), respond.values, (item) => item.price >= 135000, 5);
+>>>>>>> 2e7f60ae4ed5b5758613310bc595dbb91c14eda3
+
+                // Usage for rekomendasi untukmu
+                generateAndAppendProducts($("#produk-rekomendasi"), respond.values, () => true, Infinity);
 
             },
             error: function () {
@@ -546,6 +573,15 @@
             complete: function () {
             }
         });
+
+
+        const basketNotif = (id, name) => {
+            var strconfirm = confirm("produk '" + name + "' Tambahkan ke keranjang?");
+            if (strconfirm == true) {
+                // Perform any additional actions you need here
+            }
+        }
+
     </script>
 </body>
 {% endblock %}
